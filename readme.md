@@ -2,6 +2,10 @@
 
 Local development workspace for translating Claude Code plugin artifacts into OpenCode-compatible configuration.
 
+Research notes for the Claude Code -> OpenCode extension mapping are documented in:
+
+- `doc/research/claude-code-to-opencode-extension-port.md`
+
 ## Pro command stubs
 
 Source files live in `opencode/pro/commands/`.
