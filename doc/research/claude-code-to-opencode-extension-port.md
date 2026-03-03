@@ -88,11 +88,14 @@ Result: **Scoped symlinks preferred**.
 
 ## Implemented in This Repo
 
-### Command stubs
+### Ported commands (v1)
 
 - `opencode/pro/commands/feature.md`
 - `opencode/pro/commands/pr.md`
 - `opencode/pro/commands/pr.merged.md`
+
+These files are now full workflow command drafts (not stubs), translated from
+`_tmp_ccplugins/pro/commands/`.
 
 ### Install automation
 
@@ -138,6 +141,101 @@ Safety behavior:
 3. Treat hooks as reimplementation work (behavior-level port, not file copy).
 4. Map MCP server definitions into OpenCode config format.
 5. Decide rule strategy per target (native `AGENTS.md` vs Claude compatibility).
+
+## Command Port Ledger (Precise)
+
+Rule: no silent concessions. Every meaningful change from Claude source behavior
+must be logged below.
+
+### `/pro:feature`
+
+#### Ported cleanly
+
+- Preserved mandatory branch-first safety invariant and step ordering intent.
+- Preserved ADR lookup requirement (`doc/decisions/`) before proposing changes.
+- Preserved backlog JSON contract and `.plan/{branch-slug}` planning directory.
+- Preserved browser verification guidance and debugging constraints.
+
+#### Concessions
+
+1. `type`: syntax
+   - `source`: Claude command frontmatter uses `allowed-tools`.
+   - `target`: OpenCode command frontmatter does not include `allowed-tools`.
+   - `change`: removed `allowed-tools` and retained `description` + `agent`.
+   - `why`: OpenCode command schema only supports documented command keys.
+   - `impact`: minor.
+   - `mitigation`: keep command text explicit about required actions and tool use.
+
+2. `type`: workflow
+   - `source`: branch creation is step 0 with implicit git context.
+   - `target`: added explicit non-git bootstrap flow before branch creation.
+   - `change`: offer `git init` + initial commit + optional `gh repo create`.
+   - `why`: user requirement to support non-git directories.
+   - `impact`: minor.
+   - `mitigation`: flow still blocks all other work until branch exists.
+
+3. `type`: ecosystem
+   - `source`: definition of done references `@claude.md`.
+   - `target`: references `AGENTS.md` or `CLAUDE.md` fallback.
+   - `change`: broadened instruction file reference.
+   - `why`: OpenCode native + compatibility model.
+   - `impact`: none.
+   - `mitigation`: preserves intent while matching OpenCode docs.
+
+### `/pro:pr`
+
+#### Ported cleanly
+
+- Preserved git/remote/GitHub CLI preflight gating.
+- Preserved planning archive behavior (`.plan/{branch}` -> `.plan/.done/{branch}`).
+- Preserved ADR workflow structure and tracking artifacts.
+- Preserved version-check flow and `version-bump.json` contract.
+- Preserved manual PR fallback path.
+
+#### Concessions
+
+1. `type`: syntax
+   - `source`: Claude command uses `allowed-tools` and `AskUserQuestion` framing.
+   - `target`: OpenCode command markdown only.
+   - `change`: removed tool schema metadata and expressed decisions as guided prompts.
+   - `why`: OpenCode command format difference.
+   - `impact`: minor.
+   - `mitigation`: preserved decision branches and recommended defaults in text.
+
+2. `type`: performance
+   - `source`: single monolithic full workflow.
+   - `target`: default full workflow plus optional `fast` mode via `$ARGUMENTS`.
+   - `change`: `fast` defers ADR/version steps and writes explicit defer note.
+   - `why`: reduce runtime when users choose speed while preserving default parity.
+   - `impact`: none for default; moderate if user chooses `fast`.
+   - `mitigation`: default remains `full`; deferred work handed to `/pro:pr.merged`.
+
+### `/pro:pr.merged`
+
+#### Ported cleanly
+
+- Preserved ADR backfill workflow when missing from `/pro:pr`.
+- Preserved tag creation flow from archived `version-bump.json`.
+- Preserved tag format detection and duplicate-tag guard.
+- Preserved local/remote merged branch cleanup flow.
+
+#### Concessions
+
+1. `type`: syntax
+   - `source`: Claude frontmatter includes `allowed-tools`.
+   - `target`: OpenCode command frontmatter.
+   - `change`: removed `allowed-tools` metadata.
+   - `why`: unsupported command key in OpenCode command files.
+   - `impact`: minor.
+   - `mitigation`: preserved execution instructions in command body.
+
+## Current Status for This Conversion Slice
+
+- Command namespaced UX parity: achieved (`/pro:*` works in OpenCode).
+- Functional workflow parity for the three selected commands: largely achieved.
+- Required concessions: documented above.
+- Intentional optimization concession: `/pro:pr fast` available, default remains
+  `full`.
 
 ## Operational Notes
 
