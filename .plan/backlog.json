@@ -1,0 +1,17 @@
+{
+  "lastSequence": 1,
+  "items": [
+    {
+      "id": 1,
+      "title": "Port pro feature/pr/pr.merged commands to OpenCode",
+      "description": "Translate /pro:feature, /pro:pr, and /pro:pr.merged from Claude Code command semantics to OpenCode command semantics, preserving workflow behavior and documenting every concession.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|1|port-pro-feature-pr-pr-merged-commands",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/port-pro-commands-feature-pr-pr-merged",
+      "createdAt": "2026-03-02T21:50:47Z",
+      "status": "in-progress"
+    }
+  ]
+}
