@@ -3,16 +3,46 @@ SHELL := /bin/bash
 ROOT_DIR := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 OPENCODE_DIR ?= $(HOME)/.config/opencode
 COMMANDS_DIR := $(OPENCODE_DIR)/commands
+PLUGINS_DIR := $(OPENCODE_DIR)/plugins
 PRO_SOURCE_DIR := $(ROOT_DIR)/opencode/pro/commands
+PRO_HANDOFF_PLUGIN_SOURCE := $(ROOT_DIR)/opencode/pro/plugins/session-handoff.js
+PRO_HANDOFF_PLUGIN_LINK := $(PLUGINS_DIR)/pro-session-handoff.js
 
 NS ?= colon
 
 COLON_COMMAND_NAMES := pro:feature.md pro:pr.md pro:pr.merged.md
 SLASH_LINK := $(COMMANDS_DIR)/pro
 
-.PHONY: install uninstall status doctor
+.PHONY: help install install-commands install-plugins uninstall uninstall-commands uninstall-plugins status doctor
 
-install: doctor
+help:
+	@printf "%s\n" \
+	  "Usage: make [target] [NS=colon|slash]" \
+	  "" \
+	  "Primary targets:" \
+	  "  help                 Show this usage summary" \
+	  "  install              Install commands and plugins" \
+	  "  uninstall            Remove commands and plugins" \
+	  "  status               Show current command/plugin link status under $(COMMANDS_DIR)" \
+	  "  doctor               Validate repo and command source prerequisites" \
+	  "" \
+	  "Advanced targets:" \
+	  "  install-commands     Install only /pro commands (default namespace: colon; override with NS=slash)" \
+	  "  install-plugins      Install all available plugins (currently session-handoff)" \
+	  "  uninstall-commands   Remove only /pro command links" \
+	  "  uninstall-plugins    Remove all plugin links" \
+	  "" \
+	  "Examples:" \
+	  "  make install                # Install colon-style commands + plugins" \
+	  "  make install NS=slash       # Install slash-style commands + plugins" \
+	  "  make install-commands       # Install commands only" \
+	  "  make install-plugins        # Install plugins only" \
+	  "  make status                 # Inspect current link state"
+
+install: doctor install-commands install-plugins
+	@echo "Install complete."
+
+install-commands:
 	@mkdir -p "$(COMMANDS_DIR)"
 	@if [[ "$(NS)" == "slash" ]]; then \
 		$(MAKE) --no-print-directory install-slash; \
@@ -22,6 +52,31 @@ install: doctor
 		echo "Error: unsupported NS='$(NS)'. Use NS=colon or NS=slash."; \
 		exit 1; \
 	fi
+	@echo "Installed commands with NS=$(NS)."
+
+install-plugins:
+	@mkdir -p "$(PLUGINS_DIR)"
+	@if [[ ! -f "$(PRO_HANDOFF_PLUGIN_SOURCE)" ]]; then \
+		echo "Error: missing source plugin: $(PRO_HANDOFF_PLUGIN_SOURCE)"; \
+		exit 1; \
+	fi
+	@if [[ -e "$(PRO_HANDOFF_PLUGIN_LINK)" && ! -L "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
+		echo "Error: $(PRO_HANDOFF_PLUGIN_LINK) exists and is not a symlink. Remove or rename it, then retry."; \
+		exit 1; \
+	fi
+	@if [[ -L "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
+		target="$$(readlink "$(PRO_HANDOFF_PLUGIN_LINK)")"; \
+		if [[ "$$target" != "$(PRO_HANDOFF_PLUGIN_SOURCE)" ]]; then \
+			echo "Error: $(PRO_HANDOFF_PLUGIN_LINK) points to $$target (expected $(PRO_HANDOFF_PLUGIN_SOURCE))."; \
+			echo "Run: make uninstall-plugins to repair the link."; \
+			exit 1; \
+		fi; \
+		echo "OK: $(PRO_HANDOFF_PLUGIN_LINK) already linked"; \
+	else \
+		ln -s "$(PRO_HANDOFF_PLUGIN_SOURCE)" "$(PRO_HANDOFF_PLUGIN_LINK)"; \
+		echo "Linked: $(PRO_HANDOFF_PLUGIN_LINK) -> $(PRO_HANDOFF_PLUGIN_SOURCE)"; \
+	fi
+	@echo "Installed plugins."
 
 install-colon:
 	@for entry in $(COLON_COMMAND_NAMES); do \
@@ -68,7 +123,10 @@ install-slash:
 	@echo "Installed pro command stubs with slash namespace."
 	@echo "Try: /pro/feature, /pro/pr, /pro/pr.merged"
 
-uninstall:
+uninstall: uninstall-commands uninstall-plugins
+	@echo "Uninstall complete."
+
+uninstall-commands:
 	@set -e; \
 	for entry in $(COLON_COMMAND_NAMES); do \
 		path="$(COMMANDS_DIR)/$$entry"; \
@@ -79,7 +137,7 @@ uninstall:
 			echo "Error: $$path exists and is not a symlink; refusing to remove."; \
 			exit 1; \
 		fi; \
-	done; \
+		done; \
 	if [[ -L "$(SLASH_LINK)" ]]; then \
 		rm "$(SLASH_LINK)"; \
 		echo "Removed: $(SLASH_LINK)"; \
@@ -87,7 +145,20 @@ uninstall:
 		echo "Error: $(SLASH_LINK) exists and is not a symlink; refusing to remove."; \
 		exit 1; \
 	fi
-	@echo "Uninstall complete."
+	@echo "Removed command links."
+
+
+uninstall-plugins:
+	@if [[ -L "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
+		rm "$(PRO_HANDOFF_PLUGIN_LINK)"; \
+		echo "Removed: $(PRO_HANDOFF_PLUGIN_LINK)"; \
+		echo "Removed plugins."; \
+	elif [[ -e "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
+		echo "Error: $(PRO_HANDOFF_PLUGIN_LINK) exists and is not a symlink; refusing to remove."; \
+		exit 1; \
+	else \
+		echo "No plugin link found."; \
+	fi
 
 status:
 	@echo "Repo source: $(PRO_SOURCE_DIR)"
@@ -120,6 +191,13 @@ status:
 		echo "Slash path exists (not symlink): $(SLASH_LINK)"; \
 	else \
 		echo "Slash link missing: $(SLASH_LINK)"; \
+	fi
+	@if [[ -L "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
+		echo "Handoff plugin link: $(PRO_HANDOFF_PLUGIN_LINK) -> $$(readlink "$(PRO_HANDOFF_PLUGIN_LINK)")"; \
+	elif [[ -e "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
+		echo "Handoff plugin path exists (not symlink): $(PRO_HANDOFF_PLUGIN_LINK)"; \
+	else \
+		echo "Handoff plugin link missing: $(PRO_HANDOFF_PLUGIN_LINK)"; \
 	fi
 
 doctor:
