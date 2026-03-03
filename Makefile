@@ -8,16 +8,15 @@ PRO_SOURCE_DIR := $(ROOT_DIR)/opencode/pro/commands
 PRO_HANDOFF_PLUGIN_SOURCE := $(ROOT_DIR)/opencode/pro/plugins/session-handoff.js
 PRO_HANDOFF_PLUGIN_LINK := $(PLUGINS_DIR)/pro-session-handoff.js
 
-NS ?= colon
-
-COLON_COMMAND_NAMES := pro:feature.md pro:pr.md pro:pr.merged.md
-SLASH_LINK := $(COMMANDS_DIR)/pro
+COMMAND_FILES := $(notdir $(wildcard $(PRO_SOURCE_DIR)/*.md))
+COLON_COMMAND_NAMES := $(patsubst %,pro:%,$(COMMAND_FILES))
+COMMAND_COUNT := $(words $(COMMAND_FILES))
 
 .PHONY: help install install-commands install-plugins uninstall uninstall-commands uninstall-plugins status doctor
 
 help:
 	@printf "%s\n" \
-	  "Usage: make [target] [NS=colon|slash]" \
+	  "Usage: make [target]" \
 	  "" \
 	  "Primary targets:" \
 	  "  help                 Show this usage summary" \
@@ -27,14 +26,13 @@ help:
 	  "  doctor               Validate repo and command source prerequisites" \
 	  "" \
 	  "Advanced targets:" \
-	  "  install-commands     Install only /pro commands (default namespace: colon; override with NS=slash)" \
+	  "  install-commands     Install only /pro commands (auto-detected colon namespace)" \
 	  "  install-plugins      Install all available plugins (currently session-handoff)" \
 	  "  uninstall-commands   Remove only /pro command links" \
 	  "  uninstall-plugins    Remove all plugin links" \
 	  "" \
 	  "Examples:" \
-	  "  make install                # Install colon-style commands + plugins" \
-	  "  make install NS=slash       # Install slash-style commands + plugins" \
+	  "  make install                # Install commands + plugins" \
 	  "  make install-commands       # Install commands only" \
 	  "  make install-plugins        # Install plugins only" \
 	  "  make status                 # Inspect current link state"
@@ -44,15 +42,12 @@ install: doctor install-commands install-plugins
 
 install-commands:
 	@mkdir -p "$(COMMANDS_DIR)"
-	@if [[ "$(NS)" == "slash" ]]; then \
-		$(MAKE) --no-print-directory install-slash; \
-	elif [[ "$(NS)" == "colon" ]]; then \
-		$(MAKE) --no-print-directory install-colon; \
-	else \
-		echo "Error: unsupported NS='$(NS)'. Use NS=colon or NS=slash."; \
+	@if [[ -z "$(COMMAND_FILES)" ]]; then \
+		echo "Error: no command files found under $(PRO_SOURCE_DIR)."; \
 		exit 1; \
 	fi
-	@echo "Installed commands with NS=$(NS)."
+	$(MAKE) --no-print-directory install-colon
+	@echo "Installed $$(test -n "$(COMMAND_COUNT)" && echo $(COMMAND_COUNT) || echo 0) commands."
 
 install-plugins:
 	@mkdir -p "$(PLUGINS_DIR)"
@@ -100,29 +95,7 @@ install-colon:
 			echo "Linked: $$dest -> $$source"; \
 		fi; \
 	done
-	@echo "Installed pro command stubs with colon namespace."
-	@echo "Try: /pro:feature, /pro:pr, /pro:pr.merged"
-
-install-slash:
-	@if [[ -e "$(SLASH_LINK)" && ! -L "$(SLASH_LINK)" ]]; then \
-		echo "Error: $(SLASH_LINK) exists and is not a symlink. Remove or rename it, then retry."; \
-		exit 1; \
-	fi
-	@if [[ -L "$(SLASH_LINK)" ]]; then \
-		target="$$(readlink "$(SLASH_LINK)")"; \
-		if [[ "$$target" != "$(PRO_SOURCE_DIR)" ]]; then \
-			echo "Error: $(SLASH_LINK) points to $$target (expected $(PRO_SOURCE_DIR))."; \
-			echo "Run: make uninstall"; \
-			exit 1; \
-		fi; \
-		echo "OK: $(SLASH_LINK) already linked"; \
-	else \
-		ln -s "$(PRO_SOURCE_DIR)" "$(SLASH_LINK)"; \
-		echo "Linked: $(SLASH_LINK) -> $(PRO_SOURCE_DIR)"; \
-	fi
-	@echo "Installed pro command stubs with slash namespace."
-	@echo "Try: /pro/feature, /pro/pr, /pro/pr.merged"
-
+	@echo "Linked $(COMMAND_COUNT) pro commands under the colon namespace."
 uninstall: uninstall-commands uninstall-plugins
 	@echo "Uninstall complete."
 
@@ -137,14 +110,7 @@ uninstall-commands:
 			echo "Error: $$path exists and is not a symlink; refusing to remove."; \
 			exit 1; \
 		fi; \
-		done; \
-	if [[ -L "$(SLASH_LINK)" ]]; then \
-		rm "$(SLASH_LINK)"; \
-		echo "Removed: $(SLASH_LINK)"; \
-	elif [[ -e "$(SLASH_LINK)" ]]; then \
-		echo "Error: $(SLASH_LINK) exists and is not a symlink; refusing to remove."; \
-		exit 1; \
-	fi
+	done
 	@echo "Removed command links."
 
 
@@ -168,7 +134,12 @@ status:
 	else \
 		echo "Source directory missing"; \
 	fi
-	@for source in feature.md pr.md pr.merged.md; do \
+	@if [[ -z "$(COMMAND_FILES)" ]]; then \
+		echo "No command files detected under $(PRO_SOURCE_DIR)."; \
+	else \
+		echo "Command sources detected: $(COMMAND_COUNT)"; \
+	fi
+	@for source in $(COMMAND_FILES); do \
 		if [[ -f "$(PRO_SOURCE_DIR)/$$source" ]]; then \
 			echo "Source file OK: $(PRO_SOURCE_DIR)/$$source"; \
 		else \
@@ -185,13 +156,6 @@ status:
 			echo "Colon link missing: $$path"; \
 		fi; \
 	done
-	@if [[ -L "$(SLASH_LINK)" ]]; then \
-		echo "Slash link: $(SLASH_LINK) -> $$(readlink "$(SLASH_LINK)")"; \
-	elif [[ -e "$(SLASH_LINK)" ]]; then \
-		echo "Slash path exists (not symlink): $(SLASH_LINK)"; \
-	else \
-		echo "Slash link missing: $(SLASH_LINK)"; \
-	fi
 	@if [[ -L "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
 		echo "Handoff plugin link: $(PRO_HANDOFF_PLUGIN_LINK) -> $$(readlink "$(PRO_HANDOFF_PLUGIN_LINK)")"; \
 	elif [[ -e "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
@@ -207,9 +171,13 @@ doctor:
 			exit 1; \
 		fi; \
 	done
-	@for source in feature.md pr.md pr.merged.md; do \
+	@if [[ -z "$(COMMAND_FILES)" ]]; then \
+		echo "Error: no command files found under $(PRO_SOURCE_DIR)."; \
+		exit 1; \
+	fi
+	@for source in $(COMMAND_FILES); do \
 		if [[ ! -f "$(PRO_SOURCE_DIR)/$$source" ]]; then \
-			echo "Error: missing stub command file: $(PRO_SOURCE_DIR)/$$source"; \
+			echo "Error: missing command file: $(PRO_SOURCE_DIR)/$$source"; \
 			exit 1; \
 		fi; \
 	done

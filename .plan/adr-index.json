@@ -1,5 +1,5 @@
 {
-  "lastSequence": 2,
+  "lastSequence": 3,
   "entries": [
     {
       "branch": "feat/continue-ccplugins-port",
@@ -14,6 +14,17 @@
           "number": 2,
           "file": "002-session-handoff-check-command.md",
           "title": "Add Manual Session Handoff Verification Command"
+        }
+      ]
+    },
+    {
+      "branch": "feat/session-handoff-snapshots",
+      "slug": "feat-session-handoff-snapshots",
+      "adrs": [
+        {
+          "number": 3,
+          "file": "003-adopt-per-session-handoff-ledger.md",
+          "title": "Adopt Per-Session Handoff Ledger and CLI"
         }
       ]
     }

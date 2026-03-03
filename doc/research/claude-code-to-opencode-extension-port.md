@@ -240,13 +240,15 @@ must be logged below.
 ## Session Continuity Strategy
 
 To improve recovery from interrupted sessions, this repo now includes an
-OpenCode plugin:
+OpenCode plugin + CLI toolkit:
 
-- `opencode/pro/plugins/session-handoff.js`
+- Plugin: `opencode/pro/plugins/session-handoff.js`
+- CLI: `bin/session-handoff.mjs`
 
-When installed globally via symlink, it writes `.plan/session-handoff.md` on
-session lifecycle events (`session.created`, `session.updated`, `session.idle`) as
-a best-effort checkpoint.
+When installed globally via symlink, the plugin writes one snapshot per session
+inside `.plan/session-handoff/sessions/` and updates the ledger at
+`.plan/session-handoff.md`. The CLI lists outstanding snapshots, acknowledges or
+dismisses them, and captures manual entries (`write --trigger ...`).
 
 Install/uninstall helpers:
 
