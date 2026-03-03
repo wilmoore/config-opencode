@@ -1,5 +1,5 @@
 {
-  "lastSequence": 1,
+  "lastSequence": 6,
   "items": [
     {
       "id": 1,
@@ -12,6 +12,66 @@
       "sourceBranch": "feat/port-pro-commands-feature-pr-pr-merged",
       "createdAt": "2026-03-02T21:50:47Z",
       "status": "in-progress"
+    },
+    {
+      "id": 2,
+      "title": "Plan ccplugins command port continuation",
+      "description": "Resume the Claude Code plugin command porting effort by cataloging which commands already exist in OpenCode and which remain outstanding so the next batch can be selected.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|2|plan-ccplugins-command-port-continuation",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/continue-ccplugins-port",
+      "createdAt": "2026-03-03T16:09:14Z",
+      "status": "in-progress"
+    },
+    {
+      "id": 3,
+      "title": "Align install-handoff symlink remediation guidance",
+      "description": "Update the Makefile install-handoff target so that when the symlink points to an unexpected target it emits the same explicit recovery hint as install-colon (e.g., suggest running make uninstall) before exiting with an error, matching coderabbit review feedback.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|3|align-install-handoff-symlink-remediation-guidance",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/continue-ccplugins-port",
+      "createdAt": "2026-03-03T16:11:11Z",
+      "status": "completed"
+    },
+    {
+      "id": 4,
+      "title": "Add make help target",
+      "description": "Add a GNU-style \"make help\" target that prints a concise usage summary of the supported install/uninstall/status commands so users can discover them quickly.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|4|add-make-help-target",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/continue-ccplugins-port",
+      "createdAt": "2026-03-03T17:56:12Z",
+      "status": "completed"
+    },
+    {
+      "id": 5,
+      "title": "Unify command and plugin installs",
+      "description": "Refactor the Makefile so `make install` runs both command and plugin installers, introduce `install-commands`/`install-plugins` plus matching uninstall targets, and update docs/help accordingly.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|5|unify-command-and-plugin-installs",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/continue-ccplugins-port",
+      "createdAt": "2026-03-03T18:15:28Z",
+      "status": "completed"
+    },
+    {
+      "id": 6,
+      "title": "Add session handoff check command",
+      "description": "Create a /pro command that writes or verifies .plan/session-handoff.md so users can confirm their session handoff snapshot is current before ending work.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|6|add-session-handoff-check-command",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/continue-ccplugins-port",
+      "createdAt": "2026-03-03T19:08:51Z",
+      "status": "completed"
     }
   ]
 }

@@ -10,7 +10,7 @@ Research notes for the Claude Code -> OpenCode extension mapping are documented 
 
 Source files live in `opencode/pro/commands/`.
 
-Install symlinks into global OpenCode config:
+Install symlinks into global OpenCode config (commands + plugins):
 
 ```bash
 make install
@@ -32,4 +32,19 @@ Remove symlinks:
 
 ```bash
 make uninstall
+```
+
+## Automatic session handoff
+
+`make install` already links the session handoff plugin so `.plan/session-handoff.md`
+stays fresh during OpenCode sessions. To operate on plugins alone:
+
+```bash
+make install-plugins
+```
+
+Remove plugin links only:
+
+```bash
+make uninstall-plugins
 ```

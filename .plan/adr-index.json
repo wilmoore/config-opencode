@@ -1,0 +1,21 @@
+{
+  "lastSequence": 2,
+  "entries": [
+    {
+      "branch": "feat/continue-ccplugins-port",
+      "slug": "feat-continue-ccplugins-port",
+      "adrs": [
+        {
+          "number": 1,
+          "file": "001-split-install-targets.md",
+          "title": "Split Installer Targets for Commands and Plugins"
+        },
+        {
+          "number": 2,
+          "file": "002-session-handoff-check-command.md",
+          "title": "Add Manual Session Handoff Verification Command"
+        }
+      ]
+    }
+  ]
+}

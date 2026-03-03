@@ -237,6 +237,24 @@ must be logged below.
 - Intentional optimization concession: `/pro:pr fast` available, default remains
   `full`.
 
+## Session Continuity Strategy
+
+To improve recovery from interrupted sessions, this repo now includes an
+OpenCode plugin:
+
+- `opencode/pro/plugins/session-handoff.js`
+
+When installed globally via symlink, it writes `.plan/session-handoff.md` on
+session lifecycle events (`session.created`, `session.updated`, `session.idle`) as
+a best-effort checkpoint.
+
+Install/uninstall helpers:
+
+- `make install` (commands + plugins)
+- `make install-plugins` (plugins only)
+- `make uninstall`
+- `make uninstall-plugins`
+
 ## Operational Notes
 
 - A temporary `uv_cwd` / `ENOENT` startup error was observed while launching
