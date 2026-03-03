@@ -1,5 +1,5 @@
 {
-  "lastSequence": 6,
+  "lastSequence": 7,
   "items": [
     {
       "id": 1,
@@ -71,6 +71,18 @@
       "source": "/pro:feature",
       "sourceBranch": "feat/continue-ccplugins-port",
       "createdAt": "2026-03-03T19:08:51Z",
+      "status": "completed"
+    },
+    {
+      "id": 7,
+      "title": "Automate session handoff snapshots and install updates",
+      "description": "Add per-session session-handoff snapshots with acknowledge/dismiss workflows, update installer automation to auto-discover commands, and retire slash namespace installs.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|7|session-handoff-snapshots",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/session-handoff-snapshots",
+      "createdAt": "2026-03-03T20:35:00Z",
       "status": "completed"
     }
   ]
