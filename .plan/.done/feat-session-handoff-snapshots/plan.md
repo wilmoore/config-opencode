@@ -25,3 +25,4 @@
 ## Related ADRs
 
 - doc/decisions/002-session-handoff-check-command.md
+- doc/decisions/003-adopt-per-session-handoff-ledger.md
