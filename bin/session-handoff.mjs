@@ -121,11 +121,14 @@ switch (command) {
       exitWithError(`Unexpected args for ack: ${args.join(" ")}`)
     }
     const session = findSession(id)
+    const updatedAt = new Date().toISOString()
     session.status = "acknowledged"
-    session.acknowledgedAt = new Date().toISOString()
+    session.updatedAt = updatedAt
+    session.acknowledgedAt = updatedAt
     if (note) session.note = note
     delete session.dismissedAt
     delete session.dismissReason
+    await writeSnapshotFile(paths, session)
     await persist(id)
     console.log(`Acknowledged snapshot ${id}`)
     break
@@ -139,11 +142,14 @@ switch (command) {
       exitWithError(`Unexpected args for dismiss: ${args.join(" ")}`)
     }
     const session = findSession(id)
+    const updatedAt = new Date().toISOString()
     session.status = "dismissed"
-    session.dismissedAt = new Date().toISOString()
+    session.updatedAt = updatedAt
+    session.dismissedAt = updatedAt
     session.dismissReason = reason
     delete session.note
     delete session.acknowledgedAt
+    await writeSnapshotFile(paths, session)
     await persist(id)
     console.log(`Dismissed snapshot ${id}`)
     break
