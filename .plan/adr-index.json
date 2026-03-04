@@ -1,5 +1,5 @@
 {
-  "lastSequence": 3,
+  "lastSequence": 4,
   "entries": [
     {
       "branch": "feat/continue-ccplugins-port",
@@ -25,6 +25,17 @@
           "number": 3,
           "file": "003-adopt-per-session-handoff-ledger.md",
           "title": "Adopt Per-Session Handoff Ledger and CLI"
+        }
+      ]
+    },
+    {
+      "branch": "fix/session-handoff-message-ux",
+      "slug": "fix-session-handoff-message-ux",
+      "adrs": [
+        {
+          "number": 4,
+          "file": "004-maintain-session-handoff-metadata.md",
+          "title": "Maintain Session Handoff Metadata Integrity"
         }
       ]
     }

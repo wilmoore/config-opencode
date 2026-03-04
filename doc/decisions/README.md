@@ -23,3 +23,4 @@ We use the Michael Nygard format.
 - [001. Split Installer Targets for Commands and Plugins](001-split-install-targets.md)
 - [002. Add Manual Session Handoff Verification Command](002-session-handoff-check-command.md)
 - [003. Adopt Per-Session Handoff Ledger and CLI](003-adopt-per-session-handoff-ledger.md)
+- [004. Maintain Session Handoff Metadata Integrity](004-maintain-session-handoff-metadata.md)

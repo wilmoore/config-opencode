@@ -104,7 +104,7 @@ export const createSnapshotEntry = ({ metadata, trigger }) => {
     createdAt: metadata.now,
     updatedAt: metadata.now,
     trigger,
-  }, metadata)
+  }, metadata, trigger)
 }
 
 export const applyMetadata = (entry, metadata, trigger) => {
@@ -113,7 +113,9 @@ export const applyMetadata = (entry, metadata, trigger) => {
   entry.workingTree = metadata.workingTree
   entry.recentCommit = metadata.recentCommit
   entry.backlogSummary = metadata.backlogSummary
-  entry.trigger = trigger
+  if (typeof trigger !== "undefined") {
+    entry.trigger = trigger
+  }
   return entry
 }
 
