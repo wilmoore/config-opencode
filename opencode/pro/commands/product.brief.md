@@ -39,24 +39,24 @@ Follow the **product-brief** skill to:
 
 1. Create directories:
    ```bash
-   mkdir -p .plan/product/briefs
+   mkdir -p doc/.plan/product/briefs
    ```
 
 2. Generate filename from Working Title (per skill guidance):
    - Slugify: lowercase, replace spaces with hyphens, remove special characters
    - Format: `YYYY-MM-DD-{slug}.md`
 
-3. Write the brief to `.plan/product/briefs/{filename}`
+3. Write the brief to `doc/.plan/product/briefs/{filename}`
 
 ### Step 3a: Migration (If Legacy File Exists)
 
-If `.plan/product/brief.md` exists and is NOT an index (doesn't start with `# Product Briefs`):
+If `doc/.plan/product/brief.md` exists and is NOT an index (doesn't start with `# Product Briefs`):
 - Follow the skill's legacy migration instructions
 - Inform user: "Migrated existing brief to versioned format."
 
 ### Step 3b: Update Index
 
-Update `.plan/product/brief.md` per the skill's index format (create it if missing, then add the new row with newest-first ordering).
+Update `doc/.plan/product/brief.md` per the skill's index format (create it if missing, then add the new row with newest-first ordering).
 
 ### Step 4: Display Summary
 
@@ -71,8 +71,8 @@ Show the user:
 **Problem:** [one sentence]
 **Solution:** [one sentence]
 
-Saved to: `.plan/product/briefs/YYYY-MM-DD-{slug}.md`
-Index updated: `.plan/product/brief.md`
+Saved to: `doc/.plan/product/briefs/YYYY-MM-DD-{slug}.md`
+Index updated: `doc/.plan/product/brief.md`
 
 **Next step:** Run `/pro:product.validate` to get harsh market validation.
 ```
@@ -80,7 +80,7 @@ Index updated: `.plan/product/brief.md`
 ## Non-Git Directory Support
 
 This command works in any directory, even without git initialized:
-- Create `.plan/product/briefs/` directory if it doesn't exist
+- Create `doc/.plan/product/briefs/` directory if it doesn't exist
 - Do not require or assume git
 - Works as first step before any repo setup
 
@@ -90,7 +90,7 @@ This command works in any directory, even without git initialized:
 - Key elements extracted from unstructured input
 - Clarifying questions asked if needed (minimal)
 - Structured brief generated
-- Brief written to `.plan/product/briefs/{timestamped-file}.md`
-- Index updated at `.plan/product/brief.md`
+- Brief written to `doc/.plan/product/briefs/{timestamped-file}.md`
+- Index updated at `doc/.plan/product/brief.md`
 - Legacy single-file brief migrated (if present)
 - Summary displayed with next steps

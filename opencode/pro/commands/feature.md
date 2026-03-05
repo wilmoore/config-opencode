@@ -32,7 +32,7 @@ If `$ARGUMENTS` is empty, ask for a short feature description before proceeding.
 3. Confirm and document requirements and scope.
 4. Ask clarifying questions until design and approach are mutually clear.
 5. Add this work to backlog as `in-progress`:
-   - Ensure `.plan/backlog.json` exists; if missing create:
+   - Ensure `doc/.plan/backlog.json` exists; if missing create:
      ```json
      {"lastSequence": 0, "items": []}
      ```
@@ -51,15 +51,15 @@ If `$ARGUMENTS` is empty, ask for a short feature description before proceeding.
        "status": "in-progress"
      }
      ```
-6. Store planning notes and todos in `${ProjectRoot}/.plan/${BranchName}` where branch slashes are replaced with dashes.
-   - Example: `feat/add-dark-mode` -> `.plan/feat-add-dark-mode/`
+6. Store planning notes and todos in `${ProjectRoot}/doc/.plan/${BranchName}` where branch slashes are replaced with dashes.
+   - Example: `feat/add-dark-mode` -> `doc/.plan/feat-add-dark-mode/`
 7. Outline detailed implementation steps.
 8. Implement the feature and document changes.
 9. Run:
    - `coderabbit --prompt-only`
 10. Document known issues not addressed in this pass:
    - Preferred: `/pro:backlog.add <description>`
-   - If unavailable, append directly to `.plan/backlog.json` with:
+   - If unavailable, append directly to `doc/.plan/backlog.json` with:
      - `source` set to `/pro:feature`
      - `sourceBranch` set to current branch
 

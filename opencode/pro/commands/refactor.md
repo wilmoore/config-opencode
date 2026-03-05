@@ -35,7 +35,7 @@ safety invariant per ADR-017.**
 1. Enter **plan mode** (announce this to the user).
 2. **Check ADRs for related decisions** - Search `doc/decisions/` for prior decisions related to this code. Summarize any relevant decisions before proposing refactors. Do not suggest changes that contradict existing ADRs without explicitly acknowledging them.
 3. **Add to backlog as in-progress** - This enables `/pro:backlog.resume` to pick up where you left off:
-   - Ensure `.plan/backlog.json` exists (create with `{"lastSequence": 0, "items": []}` if not)
+   - Ensure `doc/.plan/backlog.json` exists (create with `{"lastSequence": 0, "items": []}` if not)
    - Increment `lastSequence` and add item similar to:
      ```json
      {
@@ -51,7 +51,7 @@ safety invariant per ADR-017.**
        "status": "in-progress"
      }
      ```
-4. Store all planning notes, todos, and related documentation under `${ProjectRoot}/.plan/${BranchName}`. `${ProjectRoot}` stands for the repository root on disk and `${BranchName}` is the actual git branch (e.g., `refactor/clean-up-auth`). When creating directories, replace `/` with `-` so `refactor/clean-up-auth` becomes `refactor-clean-up-auth` to avoid nested folders while keeping the real branch name unchanged.
+4. Store all planning notes, todos, and related documentation under `${ProjectRoot}/doc/.plan/${BranchName}`. `${ProjectRoot}` stands for the repository root on disk and `${BranchName}` is the actual git branch (e.g., `refactor/clean-up-auth`). When creating directories, replace `/` with `-` so `refactor/clean-up-auth` becomes `refactor-clean-up-auth` to avoid nested folders while keeping the real branch name unchanged.
 5. Outline detailed implementation steps.
 6. Implement the refactor and document changes.
 7. `> coderabbit --prompt-only`

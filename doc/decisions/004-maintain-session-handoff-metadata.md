@@ -9,7 +9,7 @@ Accepted
 ## Context
 
 Per-session handoff snapshots rely on both `index.json` and the markdown files under
-`.plan/session-handoff/sessions/`. Acknowledging or dismissing a snapshot through the
+`doc/.plan/session-handoff/sessions/`. Acknowledging or dismissing a snapshot through the
 CLI updated the JSON index but left the markdown files stale. Trigger metadata was
 also dropped whenever the plugin refreshed an entry, producing confusing
 `Trigger: undefined` headers.

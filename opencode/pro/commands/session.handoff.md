@@ -1,14 +1,14 @@
 ---
-description: "Ending a session? Refresh `.plan/session-handoff.md` and confirm the snapshot is current before you leave"
+description: "Ending a session? Refresh `doc/.plan/session-handoff.md` and confirm the snapshot is current before you leave"
 agent: build
 ---
 
 ## Context
 
 The session handoff plugin now writes one snapshot per session under
-`.plan/session-handoff/sessions/` and tracks their status in
-`.plan/session-handoff/index.json`. The shared ledger
-`.plan/session-handoff.md` summarizes what is outstanding. Use the helper CLI
+`doc/.plan/session-handoff/sessions/` and tracks their status in
+`doc/.plan/session-handoff/index.json`. The shared ledger
+`doc/.plan/session-handoff.md` summarizes what is outstanding. Use the helper CLI
 to review, acknowledge, dismiss, or create snapshots so the next session knows
 exactly what happened.
 
@@ -47,7 +47,7 @@ exactly what happened.
 
 ### Step 4: Verify the ledger
 
-1. Open `.plan/session-handoff.md` to confirm:
+1. Open `doc/.plan/session-handoff.md` to confirm:
    - `Outstanding Snapshots` only lists the entries you expect to leave behind.
    - Your new snapshot appears with status `pending`.
 2. If the ledger looks outdated, rerun the CLI commands above until it reflects

@@ -2,10 +2,8 @@ import { execSync } from "node:child_process"
 import { mkdir, readFile, writeFile } from "node:fs/promises"
 import { join, posix } from "node:path"
 import { randomUUID } from "node:crypto"
+import { planRoot } from "./plan-root.mjs"
 
-const HANDOFF_DIR = ".plan/session-handoff"
-const SUMMARY_FILENAME = ".plan/session-handoff.md"
-const BACKLOG_FILENAME = ".plan/backlog.json"
 const INDEX_TEMPLATE = { version: 1, sessions: [] }
 
 const run = (command, cwd) => {
@@ -22,19 +20,22 @@ const run = (command, cwd) => {
 
 const toPosix = (value) => value.replace(/\\/g, "/")
 
-export const getPaths = (root) => ({
-  root,
-  planDir: join(root, ".plan"),
-  handoffDir: join(root, HANDOFF_DIR),
-  sessionsDir: join(root, HANDOFF_DIR, "sessions"),
-  archiveDir: join(root, HANDOFF_DIR, "archive"),
-  indexPath: join(root, HANDOFF_DIR, "index.json"),
-  summaryPath: join(root, SUMMARY_FILENAME),
-  backlogPath: join(root, BACKLOG_FILENAME),
-})
+export const getPaths = (root) => {
+  const handoffDir = planRoot.write("session-handoff")
+  return {
+    root,
+    planDir: planRoot.CANONICAL_PLAN_ROOT,
+    handoffDir: join(root, handoffDir),
+    sessionsDir: join(root, handoffDir, "sessions"),
+    archiveDir: join(root, handoffDir, "archive"),
+    indexPath: join(root, handoffDir, "index.json"),
+    summaryPath: join(root, planRoot.write("session-handoff.md")),
+    backlogPath: join(root, planRoot.getBacklogPath()),
+  }
+}
 
 export const ensureStructure = async (paths) => {
-  await mkdir(paths.planDir, { recursive: true })
+  await mkdir(join(paths.root, planRoot.CANONICAL_PLAN_ROOT), { recursive: true })
   await mkdir(paths.handoffDir, { recursive: true })
   await mkdir(paths.sessionsDir, { recursive: true })
   await mkdir(paths.archiveDir, { recursive: true })
@@ -119,7 +120,7 @@ export const applyMetadata = (entry, metadata, trigger) => {
   return entry
 }
 
-const describeRelativePath = (entry) => toPosix(posix.join(HANDOFF_DIR, entry.relativePath))
+const describeRelativePath = (entry) => toPosix(posix.join(planRoot.CANONICAL_PLAN_ROOT, "session-handoff", entry.relativePath))
 
 const sessionHeader = (entry) => `# Session Handoff Snapshot
 
@@ -206,7 +207,7 @@ ${recentSection}
 - \`node bin/session-handoff.mjs dismiss <id> --reason "why"\` — abandon work
 - \`node bin/session-handoff.mjs write --trigger "/pro:session.handoff"\` — capture a fresh snapshot
 
-All snapshots live under \`.plan/session-handoff/sessions/\`. Review each file before acknowledging or dismissing it.`
+All snapshots live under \`${planRoot.CANONICAL_PLAN_ROOT}/session-handoff/sessions/\`. Review each file before acknowledging or dismissing it.`
 }
 
 export const writeLedger = async (paths, sessions, { currentId } = {}) => {
