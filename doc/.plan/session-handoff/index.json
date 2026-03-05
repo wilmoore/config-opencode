@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "sessions": [
+    {
+      "id": "session-2026-03-03T19-56-41-748Z-921625ee",
+      "filename": "session-2026-03-03T19-56-41-748Z-921625ee.md",
+      "relativePath": "sessions/session-2026-03-03T19-56-41-748Z-921625ee.md",
+      "status": "acknowledged",
+      "createdAt": "2026-03-03T19:56:41.748Z",
+      "updatedAt": "2026-03-03T19:56:41.748Z",
+      "branch": "feat/session-handoff-snapshots",
+      "workingTree": "dirty",
+      "recentCommit": "54c9e21 Merge pull request #2 from wilmoore/feat/continue-ccplugins-port",
+      "backlogSummary": "- In-progress items: 3 (latest: Automate session handoff snapshots and install updates)",
+      "acknowledgedAt": "2026-03-03T19:56:46.982Z",
+      "note": "test"
+    },
+    {
+      "id": "session-2026-03-03T19-57-22-939Z-b7bed64c",
+      "filename": "session-2026-03-03T19-57-22-939Z-b7bed64c.md",
+      "relativePath": "sessions/session-2026-03-03T19-57-22-939Z-b7bed64c.md",
+      "status": "pending",
+      "createdAt": "2026-03-03T19:57:22.939Z",
+      "updatedAt": "2026-03-03T19:57:22.939Z",
+      "branch": "feat/session-handoff-snapshots",
+      "workingTree": "dirty",
+      "recentCommit": "54c9e21 Merge pull request #2 from wilmoore/feat/continue-ccplugins-port",
+      "backlogSummary": "- In-progress items: 3 (latest: Automate session handoff snapshots and install updates)"
+    },
+    {
+      "id": "session-2026-03-03T20-04-02-557Z-b87f6ac2",
+      "filename": "session-2026-03-03T20-04-02-557Z-b87f6ac2.md",
+      "relativePath": "sessions/session-2026-03-03T20-04-02-557Z-b87f6ac2.md",
+      "status": "pending",
+      "createdAt": "2026-03-03T20:04:02.557Z",
+      "updatedAt": "2026-03-03T20:04:02.557Z",
+      "branch": "feat/session-handoff-snapshots",
+      "workingTree": "dirty",
+      "recentCommit": "54c9e21 Merge pull request #2 from wilmoore/feat/continue-ccplugins-port",
+      "backlogSummary": "- In-progress items: 3 (latest: Automate session handoff snapshots and install updates)"
+    },
+    {
+      "id": "session-2026-03-03T21-24-40-934Z-e9f734cc",
+      "filename": "session-2026-03-03T21-24-40-934Z-e9f734cc.md",
+      "relativePath": "sessions/session-2026-03-03T21-24-40-934Z-e9f734cc.md",
+      "status": "pending",
+      "createdAt": "2026-03-03T21:24:40.934Z",
+      "updatedAt": "2026-03-03T21:24:40.934Z",
+      "branch": "main",
+      "workingTree": "clean",
+      "recentCommit": "0de9c8c Merge pull request #3 from wilmoore/feat/session-handoff-snapshots",
+      "backlogSummary": "- In-progress items: 2 (latest: Plan ccplugins command port continuation)"
+    },
+    {
+      "id": "session-2026-03-03T21-25-00-175Z-2e854dfb",
+      "filename": "session-2026-03-03T21-25-00-175Z-2e854dfb.md",
+      "relativePath": "sessions/session-2026-03-03T21-25-00-175Z-2e854dfb.md",
+      "status": "pending",
+      "createdAt": "2026-03-03T21:25:00.175Z",
+      "updatedAt": "2026-03-03T21:25:00.175Z",
+      "branch": "main",
+      "workingTree": "clean",
+      "recentCommit": "0de9c8c Merge pull request #3 from wilmoore/feat/session-handoff-snapshots",
+      "backlogSummary": "- In-progress items: 2 (latest: Plan ccplugins command port continuation)"
+    },
+    {
+      "id": "session-2026-03-04T05-42-47-111Z-221ecae6",
+      "filename": "session-2026-03-04T05-42-47-111Z-221ecae6.md",
+      "relativePath": "sessions/session-2026-03-04T05-42-47-111Z-221ecae6.md",
+      "status": "pending",
+      "createdAt": "2026-03-04T05:42:47.111Z",
+      "updatedAt": "2026-03-04T05:42:47.111Z",
+      "branch": "fix/session-handoff-message-ux",
+      "workingTree": "clean",
+      "recentCommit": "0de9c8c Merge pull request #3 from wilmoore/feat/session-handoff-snapshots",
+      "backlogSummary": "- In-progress items: 2 (latest: Plan ccplugins command port continuation)"
+    },
+    {
+      "id": "session-2026-03-04T13-42-41-929Z-20927ef4",
+      "filename": "session-2026-03-04T13-42-41-929Z-20927ef4.md",
+      "relativePath": "sessions/session-2026-03-04T13-42-41-929Z-20927ef4.md",
+      "status": "acknowledged",
+      "createdAt": "2026-03-04T13:42:41.929Z",
+      "updatedAt": "2026-03-04T13:43:12.240Z",
+      "trigger": "dev.session",
+      "branch": "fix/session-handoff-message-ux",
+      "workingTree": "dirty",
+      "recentCommit": "0de9c8c Merge pull request #3 from wilmoore/feat/session-handoff-snapshots",
+      "backlogSummary": "- In-progress items: 2 (latest: Plan ccplugins command port continuation)",
+      "acknowledgedAt": "2026-03-04T13:43:12.240Z",
+      "note": "verification"
+    },
+    {
+      "id": "session-2026-03-04T13-43-20-216Z-c0eab507",
+      "filename": "session-2026-03-04T13-43-20-216Z-c0eab507.md",
+      "relativePath": "sessions/session-2026-03-04T13-43-20-216Z-c0eab507.md",
+      "status": "dismissed",
+      "createdAt": "2026-03-04T13:43:20.216Z",
+      "updatedAt": "2026-03-04T13:43:22.341Z",
+      "trigger": "dev.dismiss",
+      "branch": "fix/session-handoff-message-ux",
+      "workingTree": "dirty",
+      "recentCommit": "0de9c8c Merge pull request #3 from wilmoore/feat/session-handoff-snapshots",
+      "backlogSummary": "- In-progress items: 2 (latest: Plan ccplugins command port continuation)",
+      "dismissedAt": "2026-03-04T13:43:22.341Z",
+      "dismissReason": "verification"
+    },
+    {
+      "id": "session-2026-03-04T17-45-41-944Z-70d108c1",
+      "filename": "session-2026-03-04T17-45-41-944Z-70d108c1.md",
+      "relativePath": "sessions/session-2026-03-04T17-45-41-944Z-70d108c1.md",
+      "status": "pending",
+      "createdAt": "2026-03-04T17:45:41.944Z",
+      "updatedAt": "2026-03-04T17:45:41.944Z",
+      "trigger": "plugin.initialize",
+      "branch": "main",
+      "workingTree": "clean",
+      "recentCommit": "685ece7 Merge pull request #4 from wilmoore/fix/session-handoff-message-ux",
+      "backlogSummary": "- In-progress items: 2 (latest: Plan ccplugins command port continuation)"
+    }
+  ]
+}

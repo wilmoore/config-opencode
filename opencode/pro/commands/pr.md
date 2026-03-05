@@ -75,17 +75,17 @@ For web applications, prefer Playwright MCP (if available) over screenshots for:
 ## Your Task
 
 1. Resolve current branch name and its plan directory slug (`feat/x/y` -> `feat-x-y`).
-2. Move planning documentation from `.plan/{branch-slug}` to `.plan/.done/{branch-slug}` when present.
+2. Move planning documentation from `doc/.plan/{branch-slug}` to `doc/.plan/.done/{branch-slug}` when present.
 3. If mode is `full` (default):
    - Run ADR workflow below.
    - Run version check workflow below.
 4. If mode is `fast`:
    - Skip ADR creation/version check for now.
-   - Add reminder note in `.plan/.done/{branch-slug}/deferred-pr-tasks.md` listing deferred ADR/version tasks for `/pro:pr.merged`.
+   - Add reminder note in `doc/.plan/.done/{branch-slug}/deferred-pr-tasks.md` listing deferred ADR/version tasks for `/pro:pr.merged`.
 5. Create and push pull request.
 6. Document known issues not addressed:
    - Preferred: `/pro:backlog.add <description>`
-   - Fallback: append directly to `.plan/backlog.json` with:
+   - Fallback: append directly to `doc/.plan/backlog.json` with:
      - `source` = `/pro:pr`
      - `sourceBranch` = current branch
 
@@ -126,7 +126,7 @@ We use the Michael Nygard format.
 <!-- New ADRs added below -->
 ```
 
-3. `.plan/adr-index.json`:
+3. `doc/.plan/adr-index.json`:
 
 ```json
 {
@@ -137,7 +137,7 @@ We use the Michael Nygard format.
 
 ### Step 2: Check existing ADR coverage
 
-Read `.plan/adr-index.json` for the current branch:
+Read `doc/.plan/adr-index.json` for the current branch:
 
 - If ADRs already exist and no new decisions were made, skip ADR creation.
 - If new architectural decisions exist, continue.
@@ -150,7 +150,7 @@ Read `.plan/adr-index.json` for the current branch:
 
 Review:
 
-- `.plan/.done/{branch-slug}/`
+- `doc/.plan/.done/{branch-slug}/`
 - `git log main..HEAD`
 - `git diff main...HEAD`
 
@@ -187,14 +187,14 @@ Accepted
 
 ## Related
 
-- Planning: `.plan/.done/{branch-slug}/`
+- Planning: `doc/.plan/.done/{branch-slug}/`
 ```
 
 ### Step 6: Update tracking files
 
-1. Update `.plan/adr-index.json` (`lastSequence`, branch ADR list).
+1. Update `doc/.plan/adr-index.json` (`lastSequence`, branch ADR list).
 2. Update `doc/decisions/README.md` index.
-3. Add "Related ADRs" section to `.plan/.done/{branch-slug}/plan.md` when that file exists.
+3. Add "Related ADRs" section to `doc/.plan/.done/{branch-slug}/plan.md` when that file exists.
 
 ---
 
@@ -232,7 +232,7 @@ Suggested bump type by branch prefix:
 
 ### Step 4: Record version bump for post-merge tagging
 
-Write `.plan/{branch-slug}/version-bump.json`:
+Write `doc/.plan/{branch-slug}/version-bump.json`:
 
 ```json
 {

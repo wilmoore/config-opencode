@@ -32,7 +32,7 @@ export const ProSessionHandoff = async ({ worktree, directory }) => {
     }
     const ids = outstanding.map((session) => session.id).join(", ")
     console.info(`[session-handoff] Pending snapshots: ${ids}`)
-    console.info("[session-handoff] Review .plan/session-handoff.md or run /pro:session.handoff to handle them.")
+    console.info("[session-handoff] Review doc/.plan/session-handoff.md or run /pro:session.handoff to handle them.")
   }
 
   const persist = async () => {

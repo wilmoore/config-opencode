@@ -39,9 +39,9 @@ automatically whenever new command markdown files are added.
 
 Running `make install` links `opencode/pro/plugins/session-handoff.js`, which
 captures git/backlog metadata on key lifecycle events. Each snapshot is stored as
-its own file under `.plan/session-handoff/sessions/`, indexed by
-`.plan/session-handoff/index.json`, and summarized in the ledger
-`.plan/session-handoff.md`.
+its own file under `doc/.plan/session-handoff/sessions/`, indexed by
+`doc/.plan/session-handoff/index.json`, and summarized in the ledger
+`doc/.plan/session-handoff.md`.
 
 A companion CLI at `bin/session-handoff.mjs` manages the workflow:
 
@@ -62,10 +62,10 @@ node bin/session-handoff.mjs dismiss <snapshot-id> --reason "obsolete task"
 Before ending a session:
 
 1. Run `node bin/session-handoff.mjs list` to review outstanding snapshot IDs.
-2. Open the referenced files under `.plan/session-handoff/sessions/` and finish
+2. Open the referenced files under `doc/.plan/session-handoff/sessions/` and finish
    or dismiss each checklist via the CLI.
 3. Run `node bin/session-handoff.mjs write --trigger "/pro:session.handoff"` to
-   capture the latest context. The ledger at `.plan/session-handoff.md` should
+   capture the latest context. The ledger at `doc/.plan/session-handoff.md` should
    now show accurate `Outstanding Snapshots` and recent activity.
 
 This workflow keeps the shared ledger trustworthy and gives every OpenCode

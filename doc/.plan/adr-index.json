@@ -1,5 +1,5 @@
 {
-  "lastSequence": 4,
+  "lastSequence": 5,
   "entries": [
     {
       "branch": "feat/continue-ccplugins-port",
@@ -36,6 +36,17 @@
           "number": 4,
           "file": "004-maintain-session-handoff-metadata.md",
           "title": "Maintain Session Handoff Metadata Integrity"
+        }
+      ]
+    },
+    {
+      "branch": "feat/make-target-commands",
+      "slug": "feat-make-target-commands",
+      "adrs": [
+        {
+          "number": 5,
+          "file": "005-standardize-plan-root.md",
+          "title": "Standardize Planning Root at doc/.plan"
         }
       ]
     }

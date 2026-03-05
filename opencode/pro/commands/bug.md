@@ -27,7 +27,7 @@ Before planning the fix, gather the following information through guided prompts
 1. Enter **plan mode** (announce this) and immediately review ADRs for related decisions. Search `doc/decisions/` for prior decisions tied to this area, summarize what applies, and explicitly cite any ADRs you need to challenge before changing course. This ADR review is part of planning and is the only permitted doc lookup before touching code.
 2. Capture bug details via the guided prompts above. Ask each question interactively.
 3. **Add to backlog as in-progress** - This enables `/pro:backlog.resume` to pick up where you left off:
-   - Ensure `.plan/backlog.json` exists (create with `{"lastSequence": 0, "items": []}` if not)
+   - Ensure `doc/.plan/backlog.json` exists (create with `{"lastSequence": 0, "items": []}` if not)
    - Map severity from bug details: "blocks work" → critical, "degraded experience" → high, "minor annoyance" → low
    - Increment `lastSequence` and add item:
      ```json
@@ -44,7 +44,7 @@ Before planning the fix, gather the following information through guided prompts
        "status": "in-progress"
      }
      ```
-4. Store all planning notes, bug details, and related documentation here: `${ProjectRoot}/.plan/${BranchName}` with the following branch naming strategy: `fix/pattern-matcher-tests-static-rule` >> `fix-pattern-matcher-tests-static-rule`.
+4. Store all planning notes, bug details, and related documentation here: `${ProjectRoot}/doc/.plan/${BranchName}` with the following branch naming strategy: `fix/pattern-matcher-tests-static-rule` >> `fix-pattern-matcher-tests-static-rule`.
 5. **Investigate root cause** - Gather empirical evidence, trace code paths, identify where the bug originates. Do not proceed to implementation until the root cause is understood.
    - **Per ADR-063:** Check for existing logs at `${XDG_STATE_HOME:-$HOME/.local/state}/<app-name>/` before asking to run the program. Logs are authoritative artifacts—execution is a last resort.
 6. Outline fix implementation steps.

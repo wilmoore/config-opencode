@@ -21,7 +21,7 @@ The pull request `$ARGUMENTS` was successfully merged and closed.
 
 ### Step 1: Check ADR index
 
-Read `.plan/adr-index.json` and check for an entry matching merged branch slug.
+Read `doc/.plan/adr-index.json` and check for an entry matching merged branch slug.
 
 - If ADRs exist for this branch, skip ADR creation.
 - If missing, continue.
@@ -32,7 +32,7 @@ Create missing structure/files:
 
 1. `doc/decisions/`
 2. `doc/decisions/README.md` with ADR format/index boilerplate
-3. `.plan/adr-index.json`:
+3. `doc/.plan/adr-index.json`:
 
 ```json
 {
@@ -49,7 +49,7 @@ Create missing structure/files:
 
 Review:
 
-- `.plan/.done/{branch-slug}/` planning artifacts
+- `doc/.plan/.done/{branch-slug}/` planning artifacts
 - commits merged from PR
 
 Identify architecture and trade-off decisions.
@@ -63,18 +63,18 @@ Create `doc/decisions/{NNN}-{kebab-case-title}.md` using standard sections:
 - Decision
 - Consequences
 - Alternatives Considered
-- Related (`.plan/.done/{branch-slug}/`)
+- Related (`doc/.plan/.done/{branch-slug}/`)
 
 ### Step 6: Update tracking
 
-1. Update `.plan/adr-index.json`
+1. Update `doc/.plan/adr-index.json`
 2. Update `doc/decisions/README.md` index
-3. Add related ADR links into `.plan/.done/{branch-slug}/plan.md` (if present)
+3. Add related ADR links into `doc/.plan/.done/{branch-slug}/plan.md` (if present)
 
 ### Step 7: Commit and push ADRs on main
 
 ```bash
-git add doc/decisions/ .plan/adr-index.json .plan/.done/
+git add doc/decisions/ doc/.plan/adr-index.json doc/.plan/.done/
 git commit -m "Add ADRs for {feature-name}"
 git push origin main
 ```
@@ -87,7 +87,7 @@ If a version bump was recorded during `/pro:pr`, create and push a git tag.
 
 ### Step 1: Check for version bump file
 
-Look for `.plan/.done/{branch-slug}/version-bump.json`.
+Look for `doc/.plan/.done/{branch-slug}/version-bump.json`.
 
 - If missing: skip tagging.
 - If present: continue.

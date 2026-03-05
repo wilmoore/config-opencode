@@ -38,7 +38,7 @@ safety invariant per ADR-017.**
 3. Confirm and document the chore scope.
 4. Ask clarifying questions until mutual clarity is reached on what needs to be done.
 5. **Add to backlog as in-progress** - This enables `/pro:backlog.resume` to pick up where you left off:
-   - Ensure `.plan/backlog.json` exists (create with `{"lastSequence": 0, "items": []}` if not)
+   - Ensure `doc/.plan/backlog.json` exists (create with `{"lastSequence": 0, "items": []}` if not)
    - Increment `lastSequence` and add item:
      ```json
      {
@@ -54,7 +54,7 @@ safety invariant per ADR-017.**
        "status": "in-progress"
      }
      ```
-6. Store all planning notes, todos, and related documentation here: `${ProjectRoot}/.plan/${BranchName}` with the following branch naming strategy: `chore/update-deps` >> `chore-update-deps`.
+6. Store all planning notes, todos, and related documentation here: `${ProjectRoot}/doc/.plan/${BranchName}` with the following branch naming strategy: `chore/update-deps` >> `chore-update-deps`.
 7. Outline detailed implementation steps.
 8. Implement the chore and document changes.
 9. `> coderabbit --prompt-only`
