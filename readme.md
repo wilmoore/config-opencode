@@ -19,10 +19,77 @@ global OpenCode colon namespace (e.g., `pro:feature`, `pro:session.handoff`).
   ```bash
   make install-commands
   ```
-- Plugins only (currently the session handoff helper):
+- Plugins only:
   ```bash
   make install-plugins
   ```
+
+## Plan-by-default safety rail
+
+This repo ships a global OpenCode plugin that reduces the most common Plan/Build
+footgun:
+
+- You switch to `build` to execute changes.
+- You forget you are still in `build`.
+- You send the next prompt expecting `plan` behavior.
+- The agent starts editing/running immediately.
+
+### What it does
+
+When a user prompt is issued under the `build` primary agent, the plugin
+automatically switches the UI back to `plan` immediately after the prompt is
+submitted. This makes Plan the sticky default for the next prompt.
+
+Source: `opencode/pro/plugins/auto-return-to-plan.js`
+
+Optional: disable the toast via `OPENCODE_AUTO_RETURN_TO_PLAN_TOAST=0`.
+
+### Install
+
+```bash
+make install
+```
+
+This symlinks the plugin into `~/.config/opencode/plugins/` so OpenCode loads it
+automatically on startup.
+
+### Optional hardening (automated)
+
+The plugin works without any changes to `~/.config/opencode/opencode.json`.
+
+If you want additional guardrails, run:
+
+```bash
+make enable-plan-safety
+```
+
+This updates your global OpenCode config with a timestamped backup:
+
+- sets `default_agent: "plan"` (new sessions start in Plan)
+- sets Build permissions to require confirmation:
+  - `agent.build.permission.edit: "ask"`
+  - `agent.build.permission.bash: "ask"`
+
+Dry-run:
+
+```bash
+ENABLE_PLAN_SAFETY_DRY_RUN=1 make enable-plan-safety
+```
+
+Note: the updater normalizes `opencode.json` to standard JSON (comments removed).
+The original file is preserved in the backup.
+
+### Known limitation
+
+Until OpenCode supports deterministic agent switching (e.g. `tui.agent.set`),
+the plugin uses the built-in `agent.cycle` command. This is deterministic for
+the default two-primary-agent setup (Build/Plan), but may not land on Plan if
+you add additional primary agents.
+
+Upstream:
+
+- https://github.com/anomalyco/opencode/issues/14528
+- https://github.com/anomalyco/opencode/issues/14882
 - Inspect current symlink state and detected command set:
   ```bash
   make status

@@ -25,3 +25,4 @@ We use the Michael Nygard format.
 - [003. Adopt Per-Session Handoff Ledger and CLI](003-adopt-per-session-handoff-ledger.md)
 - [004. Maintain Session Handoff Metadata Integrity](004-maintain-session-handoff-metadata.md)
 - [005. Standardize Planning Root at doc/.plan](005-standardize-plan-root.md)
+- [006. Add Plan-by-default Safety Rail](006-plan-by-default-safety-rail.md)

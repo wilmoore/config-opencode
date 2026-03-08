@@ -10,6 +10,9 @@ MAKE_SOURCE_DIR := $(ROOT_DIR)/opencode/make/commands
 PRO_HANDOFF_PLUGIN_SOURCE := $(ROOT_DIR)/opencode/pro/plugins/session-handoff.js
 PRO_HANDOFF_PLUGIN_LINK := $(PLUGINS_DIR)/pro-session-handoff.js
 
+PLAN_SAFETY_PLUGIN_SOURCE := $(ROOT_DIR)/opencode/pro/plugins/auto-return-to-plan.js
+PLAN_SAFETY_PLUGIN_LINK := $(PLUGINS_DIR)/pro-auto-return-to-plan.js
+
 PRO_COMMAND_FILES := $(notdir $(wildcard $(PRO_SOURCE_DIR)/*.md))
 MAKE_COMMAND_FILES := $(notdir $(wildcard $(MAKE_SOURCE_DIR)/*.md))
 
@@ -18,7 +21,7 @@ MAKE_COMMAND_NAMES := $(patsubst %,make:%,$(MAKE_COMMAND_FILES))
 
 TOTAL_COMMAND_COUNT := $(words $(PRO_COMMAND_FILES)) $(words $(MAKE_COMMAND_FILES))
 
-.PHONY: help install install-commands install-plugins uninstall uninstall-commands uninstall-plugins status doctor
+.PHONY: help install install-commands install-plugins uninstall uninstall-commands uninstall-plugins status doctor enable-plan-safety test
 
 .DEFAULT_GOAL := help
 
@@ -32,7 +35,7 @@ help: ## Show this help
 		awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z0-9_.-]+:.*?## / { printf "  %-20s %s\n", $$1, $$2 }' $(MAKEFILE_LIST); \
 	fi
 
-install: ## Install commands and plugins
+install: install-commands install-plugins ## Install commands and plugins
 	@echo "Install complete."
 
 install-commands: ## Install /pro and /make commands
@@ -92,6 +95,37 @@ install-make:
 		fi; \
 	done
 	@echo "Linked $(words $(MAKE_COMMAND_FILES)) make commands."
+
+install-plugins: ## Install plugin symlinks
+	@mkdir -p "$(PLUGINS_DIR)"
+	$(MAKE) --no-print-directory install-pro-plugins
+	@echo "Installed plugins."
+
+install-pro-plugins:
+	@set -e; \
+	for pair in \
+		"$(PRO_HANDOFF_PLUGIN_LINK)|$(PRO_HANDOFF_PLUGIN_SOURCE)" \
+		"$(PLAN_SAFETY_PLUGIN_LINK)|$(PLAN_SAFETY_PLUGIN_SOURCE)" \
+	; do \
+		dest="$${pair%%|*}"; \
+		source="$${pair#*|}"; \
+		if [[ -e "$$dest" && ! -L "$$dest" ]]; then \
+			echo "Error: $$dest exists and is not a symlink. Remove or rename it, then retry."; \
+			exit 1; \
+		fi; \
+		if [[ -L "$$dest" ]]; then \
+			target="$$(readlink "$$dest")"; \
+			if [[ "$$target" != "$$source" ]]; then \
+				echo "Error: $$dest points to $$target (expected $$source)."; \
+				echo "Run: make uninstall"; \
+				exit 1; \
+			fi; \
+			echo "OK: $$dest already linked"; \
+		else \
+			ln -s "$$source" "$$dest"; \
+			echo "Linked: $$dest -> $$source"; \
+		fi; \
+	done
 uninstall: uninstall-commands uninstall-plugins ## Remove commands and plugins
 	@echo "Uninstall complete."
 
@@ -122,15 +156,22 @@ uninstall-commands:
 
 
 uninstall-plugins: ## Remove plugin links
-	@if [[ -L "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
-		rm "$(PRO_HANDOFF_PLUGIN_LINK)"; \
-		echo "Removed: $(PRO_HANDOFF_PLUGIN_LINK)"; \
+	@set -e; \
+	removed=0; \
+	for dest in "$(PRO_HANDOFF_PLUGIN_LINK)" "$(PLAN_SAFETY_PLUGIN_LINK)"; do \
+		if [[ -L "$$dest" ]]; then \
+			rm "$$dest"; \
+			echo "Removed: $$dest"; \
+			removed=1; \
+		elif [[ -e "$$dest" ]]; then \
+			echo "Error: $$dest exists and is not a symlink; refusing to remove."; \
+			exit 1; \
+		fi; \
+	done; \
+	if [[ "$$removed" -eq 1 ]]; then \
 		echo "Removed plugins."; \
-	elif [[ -e "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
-		echo "Error: $(PRO_HANDOFF_PLUGIN_LINK) exists and is not a symlink; refusing to remove."; \
-		exit 1; \
 	else \
-		echo "No plugin link found."; \
+		echo "No plugin links found."; \
 	fi
 
 status: ## Show current command/plugin link status
@@ -181,13 +222,23 @@ status: ## Show current command/plugin link status
 			echo "Make link missing: $$path"; \
 		fi; \
 	done
-	@if [[ -L "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
-		echo "Handoff plugin link: $(PRO_HANDOFF_PLUGIN_LINK) -> $$(readlink "$(PRO_HANDOFF_PLUGIN_LINK)")"; \
-	elif [[ -e "$(PRO_HANDOFF_PLUGIN_LINK)" ]]; then \
-		echo "Handoff plugin path exists (not symlink): $(PRO_HANDOFF_PLUGIN_LINK)"; \
-	else \
-		echo "Handoff plugin link missing: $(PRO_HANDOFF_PLUGIN_LINK)"; \
-	fi
+	@for label in \
+		"Handoff plugin|$(PRO_HANDOFF_PLUGIN_LINK)" \
+		"Plan safety plugin|$(PLAN_SAFETY_PLUGIN_LINK)" \
+	; do \
+		name="$${label%%|*}"; \
+		path="$${label#*|}"; \
+		if [[ -L "$$path" ]]; then \
+			echo "$$name link: $$path -> $$(readlink "$$path")"; \
+		elif [[ -e "$$path" ]]; then \
+			echo "$$name path exists (not symlink): $$path"; \
+		else \
+			echo "$$name link missing: $$path"; \
+		fi; \
+	done
+
+enable-plan-safety: ## Apply Plan-by-default safety rails to global config
+	@node bin/enable-plan-safety.mjs
 
 doctor: ## Validate repo and command source prerequisites
 	@for path in "$(ROOT_DIR)" "$(OPENCODE_DIR)" "$(PRO_SOURCE_DIR)"; do \
@@ -213,3 +264,6 @@ doctor: ## Validate repo and command source prerequisites
 		fi; \
 	done
 	@echo "Doctor checks passed."
+
+test: ## Run local unit tests
+	@node --test test/*.test.mjs
