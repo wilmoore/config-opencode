@@ -1,5 +1,5 @@
 {
-  "lastSequence": 8,
+  "lastSequence": 11,
   "items": [
     {
       "id": 1,
@@ -95,6 +95,42 @@
       "source": "/make:help",
       "sourceBranch": "feat/make-target-commands",
       "createdAt": "2026-03-04T00:00:00Z",
+      "status": "in-progress"
+    },
+    {
+      "id": 9,
+      "title": "Add Plan-by-default safety rail",
+      "description": "Add a global OpenCode plugin that automatically returns the active primary agent to Plan after any user prompt issued under Build, and provide an explicit Makefile target (make enable-plan-safety) that applies Plan-by-default + Build permission gating to the user's global OpenCode config with backups and dry-run support.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|9|add-plan-by-default-safety-rail",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/force-plan-mode-default",
+      "createdAt": "2026-03-08T00:36:40Z",
+      "status": "in-progress"
+    },
+    {
+      "id": 10,
+      "title": "Deterministic primary agent switching for safety plugins",
+      "description": "Replace the auto-return-to-plan plugin's reliance on `agent.cycle` with a deterministic set-by-name API/event once OpenCode exposes it (e.g., `tui.agent.set { name }` and/or a current-agent query), so the safety rail remains correct even with multiple custom primary agents.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|10|deterministic-primary-agent-switching-for-safety-plugins",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/force-plan-mode-default",
+      "createdAt": "2026-03-08T00:36:40Z",
+      "status": "in-progress"
+    },
+    {
+      "id": 11,
+      "title": "Harden auto-return-to-plan against custom primary agent cycles",
+      "description": "The current auto-return-to-plan plugin relies on `agent.cycle`, which is only deterministic for the default two-primary-agent setup (Build/Plan). Once upstream exposes deterministic agent switching (e.g. `tui.agent.set { name }`) and/or a current-agent API/event, update the plugin to switch to Plan by name so the safety rail remains correct even with multiple custom primary agents.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|11|harden-auto-return-to-plan-against-custom-primary-agent-cycles",
+      "source": "/pro:pr",
+      "sourceBranch": "feat/force-plan-mode-default",
+      "createdAt": "2026-03-08T02:45:41Z",
       "status": "in-progress"
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "lastSequence": 5,
+  "lastSequence": 6,
   "entries": [
     {
       "branch": "feat/continue-ccplugins-port",
@@ -47,6 +47,17 @@
           "number": 5,
           "file": "005-standardize-plan-root.md",
           "title": "Standardize Planning Root at doc/.plan"
+        }
+      ]
+    },
+    {
+      "branch": "feat/force-plan-mode-default",
+      "slug": "feat-force-plan-mode-default",
+      "adrs": [
+        {
+          "number": 6,
+          "file": "006-plan-by-default-safety-rail.md",
+          "title": "Add Plan-by-default Safety Rail"
         }
       ]
     }
