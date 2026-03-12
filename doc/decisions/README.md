@@ -26,3 +26,4 @@ We use the Michael Nygard format.
 - [004. Maintain Session Handoff Metadata Integrity](004-maintain-session-handoff-metadata.md)
 - [005. Standardize Planning Root at doc/.plan](005-standardize-plan-root.md)
 - [006. Add Plan-by-default Safety Rail](006-plan-by-default-safety-rail.md)
+- [007. Add /rules Toolkit Commands and Opt-in AGENTS Install](007-add-rules-toolkit-and-opt-in-agents-install.md)

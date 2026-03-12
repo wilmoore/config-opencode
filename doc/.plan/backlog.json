@@ -1,5 +1,5 @@
 {
-  "lastSequence": 11,
+  "lastSequence": 28,
   "items": [
     {
       "id": 1,
@@ -132,6 +132,210 @@
       "sourceBranch": "feat/force-plan-mode-default",
       "createdAt": "2026-03-08T02:45:41Z",
       "status": "in-progress"
+    },
+    {
+      "id": 12,
+      "title": "Ccplugins port unified roadmap (pro/author/clip + infra)",
+      "description": "Create a durable, backlog-driven roadmap and PRD/brief for porting the Claude Code marketplace package `SavvyAI/ccplugins` into OpenCode-native configuration. Scope includes: remaining `/pro:*` commands, `/author:*` commands, `/clip:*` content capture commands (as OpenCode commands, not skills), and non-command infrastructure parity (MCP config, hooks, templates/bin assets).\n\nKey decisions for roadmap order:\n- Port `/pro:spec*` before `/pro:backlog*`.\n- Move `/pro:spike` early.\n- Drop only build-in-public (legacy agent/skill); keep `/pro:social` and `/pro:og`.\n- Drop `bip.*` entirely.\n- Skip legacy `/pro:rules*` in favor of toolkit-native `/rules:*`.\n- `/clip:content.screenshot` should copy an actual image to clipboard cross-platform when possible, with a clear fallback to copying a file path.\n\nCanonical planning root: `doc/.plan/` (ADR-005).\n\nThis epic is the narrative anchor: the backlog + brief must let a new session resume without re-research.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|12|ccplugins-port-unified-roadmap-pro-author-clip-infra",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "in-progress"
+    },
+    {
+      "id": 13,
+      "title": "Port /pro:spec and /pro:spec.import",
+      "description": "Port `_tmp_ccplugins/pro/commands/spec.md` and `_tmp_ccplugins/pro/commands/spec.import.md` into `opencode/pro/commands/`, translating to OpenCode command conventions and ensuring all artifacts are written under `doc/.plan/` (ADR-005).",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|13|port-pro-spec-and-spec-import",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 14,
+      "title": "Port /pro:backlog* commands",
+      "description": "Port `_tmp_ccplugins/pro/commands/backlog.md`, `backlog.add.md`, `backlog.resume.md`, and `backlog.mvp.md` into `opencode/pro/commands/`. Ensure canonical backlog path is `doc/.plan/backlog.json` (ADR-005) and update command text accordingly.",
+      "category": "feature",
+      "severity": "high",
+      "fingerprint": "feature|14|port-pro-backlog-commands",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 15,
+      "title": "Port /pro:spike",
+      "description": "Port `_tmp_ccplugins/pro/commands/spike.md` into `opencode/pro/commands/`, aligning planning artifacts to `doc/.plan/` and ensuring the command remains time-boxed and documentation-friendly.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|15|port-pro-spike",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 16,
+      "title": "Port /pro:onboarding",
+      "description": "Port `_tmp_ccplugins/pro/commands/onboarding.md` into `opencode/pro/commands/`, but skip legacy `/pro:rules*` commands in favor of a toolkit-native `/rules:*` namespace. Update onboarding guidance to point to `/rules:*` workflows instead of relying on `CLAUDE.md` symlink installs.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|16|port-pro-onboarding",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 17,
+      "title": "Port /pro:audit* commands",
+      "description": "Port `_tmp_ccplugins/pro/commands/audit.md`, `audit.quality.md`, `audit.repo.md`, and `audit.security.md` into `opencode/pro/commands/`. Ensure any backlog output targets `doc/.plan/backlog.json` and any templates referenced are relocated consistently.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|17|port-pro-audit-commands",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 18,
+      "title": "Port /pro:quality-gate and /pro:dev.setup (plus templates/_bins strategy)",
+      "description": "Port `_tmp_ccplugins/pro/commands/quality-gate.md` and `dev.setup.md` into `opencode/pro/commands/`. Decide and implement a stable home for legacy `_tmp_ccplugins/pro/commands/_templates/*` and `_bins/*` assets, then update command references.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|18|port-pro-quality-gate-and-dev-setup-with-assets",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 19,
+      "title": "Port branch/session ops commands",
+      "description": "Port `_tmp_ccplugins/pro/commands/branch.park.md`, `branch.rmrf.md`, `handoff.md`, `git.main.md`, and `roadmap.md` into `opencode/pro/commands/`, aligning planning paths with `doc/.plan/` and ensuring safety prompts remain explicit.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|19|port-pro-branch-session-ops-commands",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 20,
+      "title": "Port /pro:product.validate and /pro:product.pitch",
+      "description": "Port `_tmp_ccplugins/pro/commands/product.validate.md` and `product.pitch.md` into `opencode/pro/commands/`, keeping outputs compatible with `doc/.plan/product/` artifacts and existing `/pro:product.brief` flow.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|20|port-pro-product-validate-and-pitch",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 21,
+      "title": "Port remaining /pro:* long tail (excluding bip.*)",
+      "description": "Port the remaining legacy pro commands into `opencode/pro/commands/` (including `social.md` and `og.md`, excluding `bip.md` and `bip.setup.md`). Ensure any template/bin dependencies are resolved via the standardized assets strategy.",
+      "category": "feature",
+      "severity": "low",
+      "fingerprint": "feature|21|port-pro-long-tail-excluding-bip",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 22,
+      "title": "Port /author:* commands",
+      "description": "Port `_tmp_ccplugins/author/commands/*` into OpenCode commands so `/author:*` workflows are available under OpenCode. Ensure install automation can symlink the `author:*` namespace and that the book project structure is preserved.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|22|port-author-commands",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 23,
+      "title": "Port /clip:* commands as OpenCode commands",
+      "description": "Implement `/clip:*` as OpenCode commands (not skills) based on `_tmp_ccplugins/clip/skills/*` intent. `/clip:content.screenshot` must copy an actual image to clipboard cross-platform when possible, with fallback to copying a file path.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|23|port-clip-commands-as-opencode-commands",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 24,
+      "title": "Port Pro MCP server config to OpenCode",
+      "description": "Translate `_tmp_ccplugins/pro/.mcp.json` into OpenCode `opencode.json` MCP configuration (or an equivalent documented setup). Decide which servers are enabled by default versus documented as optional.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|24|port-pro-mcp-server-config-to-opencode",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 25,
+      "title": "Port Pro hooks (checkpoint + error capture) to OpenCode plugin or de-scope",
+      "description": "Claude Code hook declarations in `_tmp_ccplugins/pro/hooks/hooks.json` and scripts (`checkpoint.sh`, `error-capture.sh`) do not port 1:1 to OpenCode. Re-implement the behavior in an OpenCode plugin where feasible, or explicitly de-scope with documented trade-offs.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|25|port-pro-hooks-to-opencode-plugin-or-descope",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "open"
+    },
+    {
+      "id": 26,
+      "title": "Add OpenCode-only /pro:copy.last.response",
+      "description": "Add an OpenCode-only helper command similar to `/pro:copy.questions`, but instead copies the entire most recent assistant response to the clipboard to avoid manual scrolling/copying during planning and documentation work.",
+      "category": "feature",
+      "severity": "low",
+      "fingerprint": "feature|26|add-opencode-only-pro-copy-last-response",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-08T05:02:46Z",
+      "status": "completed"
+    },
+    {
+      "id": 27,
+      "title": "Add /rules:* toolkit commands",
+      "description": "Add a toolkit-native `/rules:*` command namespace that helps place rules correctly (command vs plugin vs ADR vs docs), creates provenance-aware rule proposals via a planning conversation, and applies changes only when leaving plan mode via `/rules:apply`. This replaces the legacy `/pro:rules*` methodology.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|27|add-rules-toolkit-commands",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-10T16:30:37Z",
+      "status": "completed"
+    },
+    {
+      "id": 28,
+      "title": "Add opt-in install for toolkit AGENTS.md",
+      "description": "Ship a minimal, constitutional `opencode/AGENTS.md` and add explicit Makefile targets (`make install-agents`, `make uninstall-agents`) to symlink it to `~/.config/opencode/AGENTS.md` without making it part of the default install.",
+      "category": "feature",
+      "severity": "low",
+      "fingerprint": "feature|28|add-opt-in-install-for-toolkit-agents-md",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "createdAt": "2026-03-10T16:30:37Z",
+      "status": "completed"
     }
   ]
 }
