@@ -1,5 +1,5 @@
 {
-  "lastSequence": 6,
+  "lastSequence": 7,
   "entries": [
     {
       "branch": "feat/continue-ccplugins-port",
@@ -58,6 +58,17 @@
           "number": 6,
           "file": "006-plan-by-default-safety-rail.md",
           "title": "Add Plan-by-default Safety Rail"
+        }
+      ]
+    },
+    {
+      "branch": "feat/ccplugins-port-roadmap-story",
+      "slug": "feat-ccplugins-port-roadmap-story",
+      "adrs": [
+        {
+          "number": 7,
+          "file": "007-add-rules-toolkit-and-opt-in-agents-install.md",
+          "title": "Add /rules Toolkit Commands and Opt-in AGENTS Install"
         }
       ]
     }

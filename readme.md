@@ -102,6 +102,35 @@ Upstream:
 Slash namespaces are no longer supported—the colon namespace now updates
 automatically whenever new command markdown files are added.
 
+## Clipboard helpers
+
+- `/pro:copy.questions` copies recent clarifying questions to your clipboard.
+- `/pro:copy.last.response` copies the most recent assistant response to your clipboard.
+
+## Rules toolkit
+
+This repo also ships a `/rules:*` command namespace for creating and maintaining durable, explainable rules without bloating `AGENTS.md`:
+
+- `/rules:where` decide where a rule should live (command vs plugin vs ADR vs docs)
+- `/rules:propose` run a planning conversation and output an Apply Pack (no writes)
+- `/rules:apply` apply the latest Apply Pack (writes)
+- `/rules:why` trace provenance for "why does this rule exist?"
+- `/rules:stale` find rules that are past ReviewBy
+
+## Optional: install toolkit AGENTS.md
+
+This is intentionally opt-in. To symlink the toolkit's minimal constitution rules to your global OpenCode config:
+
+```bash
+make install-agents
+```
+
+To remove the symlink:
+
+```bash
+make uninstall-agents
+```
+
 ## Session handoff workflow
 
 Running `make install` links `opencode/pro/plugins/session-handoff.js`, which
