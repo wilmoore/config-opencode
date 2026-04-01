@@ -1,5 +1,5 @@
 {
-  "lastSequence": 29,
+  "lastSequence": 30,
   "items": [
     {
       "id": 1,
@@ -349,6 +349,23 @@
       "createdAt": "2026-03-26T07:22:39Z",
       "status": "completed",
       "completedAt": "2026-04-01T16:53:11Z"
+    },
+    {
+      "id": 30,
+      "title": "Harden /pro:backlog* UX parity and validation",
+      "description": "Follow-up after porting `/pro:backlog*`:
+
+- Improve selection UX beyond plain numbered prompts (where OpenCode supports it).
+- Decide and document backlog status vocabulary (currently uses `open|in-progress|completed`; branch abort paths also mention `aborted`).
+- Re-run `coderabbit --prompt-only` when rate limits/timeouts allow and address any additional findings.
+",
+      "category": "chore",
+      "severity": "low",
+      "fingerprint": "chore|30|harden-pro-backlog-ux-parity-and-validation",
+      "source": "/pro:pr",
+      "sourceBranch": "feat/port-pro-backlog-spec-spike",
+      "createdAt": "2026-04-01T16:56:59Z",
+      "status": "open"
     }
   ]
 }
