@@ -81,7 +81,9 @@ For web apps, prefer Playwright MCP (if available) over screenshots for:
 
 ## Definition of Done
 
-See project instruction files (`AGENTS.md` or `CLAUDE.md` compatibility fallback).
+See project instruction files inside the project root only (`AGENTS.md`, `CLAUDE.md`, or `.claude/CLAUDE.md`).
+
+Do not glob or search outside the project directory for instruction files (ignore any global `AGENTS.md`/`CLAUDE.md`).
 
 - All feature requirements are met.
 - Verified by both user and assistant.

@@ -1,5 +1,5 @@
 {
-  "lastSequence": 7,
+  "lastSequence": 9,
   "entries": [
     {
       "branch": "feat/continue-ccplugins-port",
@@ -69,6 +69,22 @@
           "number": 7,
           "file": "007-add-rules-toolkit-and-opt-in-agents-install.md",
           "title": "Add /rules Toolkit Commands and Opt-in AGENTS Install"
+        }
+      ]
+    },
+    {
+      "branch": "feat/port-pro-backlog-spec-spike",
+      "slug": "feat-port-pro-backlog-spec-spike",
+      "adrs": [
+        {
+          "number": 8,
+          "file": "008-project-scoped-instruction-discovery.md",
+          "title": "Project-Scoped Instruction Discovery for /pro Commands"
+        },
+        {
+          "number": 9,
+          "file": "009-backlog-resume-recommendation-uses-session-handoff.md",
+          "title": "/pro:backlog.resume Recommends a Default Using Session Handoff"
         }
       ]
     }
