@@ -3,7 +3,7 @@ description: "Need to improve existing code? → Creates a dedicated branch for 
 allowed-tools: ["Bash", "Read", "Write", "Edit"]
 ---
 
-Review the coding standards (SEE: CLAUDE.md), docs, and code, and refactor the code follow the standards, including:
+Review the project's coding standards and refactor the code to follow them.
 
   0. Make errors more user-friendly in development while still keeping useful debugging info.
   1. **Magic Strings/Numbers**: Replace with named constants in appropriate constant files or i18n keys
@@ -14,7 +14,20 @@ Review the coding standards (SEE: CLAUDE.md), docs, and code, and refactor the c
   6. **Error Handling**: Ensure proper error handling with user-friendly messages
   7. **Missing Tests**: Identify what tests are needed for the change
   8. **Code Smells**: Remove commented code, console.logs, TODOs, or placeholder implementations
-  9. **CLAUDE.md Violations**: Check against both global and project CLAUDE.md requirements
+  9. **Project Rules Only**: Only consider instruction files that are inside the current project root (never glob `$HOME`, `~/.config`, or other directories outside the repo)
+
+Rules discovery (project-scoped):
+
+1. Resolve the project root:
+   - If inside a git repo: `git rev-parse --show-toplevel`
+   - Otherwise: use the current working directory
+2. Check (in this order) ONLY within that root:
+   - `AGENTS.md`
+   - `CLAUDE.md`
+   - `.claude/CLAUDE.md`
+   - `doc/decisions/*` and `doc/rules/*` (if present)
+
+Do not search for or rely on global `AGENTS.md`/`CLAUDE.md` files outside the project.
 
 ## Browser Verification
 
