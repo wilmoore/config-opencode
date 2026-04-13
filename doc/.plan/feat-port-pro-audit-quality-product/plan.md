@@ -23,19 +23,33 @@ Port the remaining ccplugins `/pro:*` commands for audit, quality, and product w
 
 ### Phase 1: Evaluate #11 (Harden auto-return-to-plan)
 
-- [ ] Check current OpenCode plugin API capabilities
-- [ ] Determine if `tui.agent.set { name }` or equivalent exists
-- [ ] If not available: document as "blocked on upstream" or de-scope
-- [ ] If available: implement deterministic agent switching
+- [x] Check current OpenCode plugin API capabilities
+- [x] Determine if `tui.agent.set { name }` or equivalent exists
+
+**Finding:** OpenCode TUI does not currently expose a deterministic agent-switching API.
+
+- Current plugin uses `agent.cycle` which cycles through agents
+- No `tui.agent.set { name }` or equivalent method available
+- The TUI LocalProvider manages agent state internally but doesn't expose direct setting
+
+**Decision:** Mark #11 as **blocked on upstream**. The current `agent.cycle` approach works correctly for the default two-agent setup (Build/Plan). When OpenCode exposes a deterministic agent API, this can be revisited.
+
+**Action:** Update backlog status to "open" with a note about upstream dependency.
 
 ### Phase 2: Port Audit Commands (#17)
 
-- [ ] Read `_tmp_ccplugins/pro/commands/audit.md`
-- [ ] Read `_tmp_ccplugins/pro/commands/audit.quality.md`
-- [ ] Read `_tmp_ccplugins/pro/commands/audit.repo.md`
-- [ ] Read `_tmp_ccplugins/pro/commands/audit.security.md`
-- [ ] Port each to `opencode/pro/commands/`
-- [ ] Ensure backlog output targets `doc/.plan/backlog.json`
+- [x] Read `_tmp_ccplugins/pro/commands/audit.md`
+- [x] Read `_tmp_ccplugins/pro/commands/audit.quality.md`
+- [x] Read `_tmp_ccplugins/pro/commands/audit.repo.md`
+- [x] Read `_tmp_ccplugins/pro/commands/audit.security.md`
+- [x] Port each to `opencode/pro/commands/`
+- [x] Ensure backlog output targets `doc/.plan/backlog.json`
+
+**Ported files:**
+- `opencode/pro/commands/audit.md`
+- `opencode/pro/commands/audit.quality.md`
+- `opencode/pro/commands/audit.repo.md`
+- `opencode/pro/commands/audit.security.md`
 
 ### Phase 3: Port Quality-Gate and Dev.Setup (#18)
 
