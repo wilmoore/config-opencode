@@ -182,6 +182,19 @@
       "workingTree": "dirty",
       "recentCommit": "8cd8604 Merge pull request #9 from wilmoore/fix/session-handoff-cli-reference",
       "backlogSummary": "- In-progress items: 1 (latest: Port /pro:onboarding)"
+    },
+    {
+      "id": "session-2026-04-13T23-23-21-241Z-7be613a9",
+      "filename": "session-2026-04-13T23-23-21-241Z-7be613a9.md",
+      "relativePath": "sessions/session-2026-04-13T23-23-21-241Z-7be613a9.md",
+      "status": "pending",
+      "createdAt": "2026-04-13T23:23:21.241Z",
+      "updatedAt": "2026-04-13T23:23:21.241Z",
+      "trigger": "plugin.initialize",
+      "branch": "feat/port-pro-onboarding",
+      "workingTree": "clean",
+      "recentCommit": "0da4c70 Merge pull request #10 from wilmoore/feat/port-pro-onboarding",
+      "backlogSummary": "- In-progress items: 1 (latest: Port /pro:onboarding)"
     }
   ]
 }
