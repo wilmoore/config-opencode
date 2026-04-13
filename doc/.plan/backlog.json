@@ -129,9 +129,9 @@
       "severity": "medium",
       "fingerprint": "feature|11|harden-auto-return-to-plan-against-custom-primary-agent-cycles",
       "source": "/pro:pr",
-      "sourceBranch": "feat/force-plan-mode-default",
+      "sourceBranch": "feat/port-pro-audit-quality-product",
       "createdAt": "2026-03-08T02:45:41Z",
-      "status": "open"
+      "status": "in-progress"
     },
     {
       "id": 12,
@@ -201,9 +201,9 @@
       "severity": "medium",
       "fingerprint": "feature|17|port-pro-audit-commands",
       "source": "/pro:feature",
-      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "sourceBranch": "feat/port-pro-audit-quality-product",
       "createdAt": "2026-03-08T05:02:46Z",
-      "status": "open"
+      "status": "in-progress"
     },
     {
       "id": 18,
@@ -213,9 +213,9 @@
       "severity": "medium",
       "fingerprint": "feature|18|port-pro-quality-gate-and-dev-setup-with-assets",
       "source": "/pro:feature",
-      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "sourceBranch": "feat/port-pro-audit-quality-product",
       "createdAt": "2026-03-08T05:02:46Z",
-      "status": "open"
+      "status": "in-progress"
     },
     {
       "id": 19,
@@ -237,9 +237,9 @@
       "severity": "medium",
       "fingerprint": "feature|20|port-pro-product-validate-and-pitch",
       "source": "/pro:feature",
-      "sourceBranch": "feat/ccplugins-port-roadmap-story",
+      "sourceBranch": "feat/port-pro-audit-quality-product",
       "createdAt": "2026-03-08T05:02:46Z",
-      "status": "open"
+      "status": "in-progress"
     },
     {
       "id": 21,
