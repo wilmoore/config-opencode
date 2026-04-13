@@ -394,9 +394,9 @@
       "severity": "medium",
       "fingerprint": "manual|33|port-pro-evaluate-framework-skill",
       "source": "manual",
-      "sourceBranch": "main",
+      "sourceBranch": "feat/port-pro-evaluate-framework",
       "createdAt": "2026-04-13T18:35:38Z",
-      "status": "open"
+      "status": "in-progress"
     }
   ]
 }
