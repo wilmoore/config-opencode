@@ -139,28 +139,34 @@ its own file under `doc/.plan/session-handoff/sessions/`, indexed by
 `doc/.plan/session-handoff/index.json`, and summarized in the ledger
 `doc/.plan/session-handoff.md`.
 
-A companion CLI at `bin/session-handoff.mjs` manages the workflow:
+A companion CLI manages the workflow (installed to `~/.config/opencode/bin/session-handoff.mjs` by `make install`). Run it from the client project root:
 
 ```bash
 # Show pending snapshots (add --all for history)
-node bin/session-handoff.mjs list
+node "$HOME/.config/opencode/bin/session-handoff.mjs" list
 
 # Capture a fresh snapshot for the current repo state
-node bin/session-handoff.mjs write --trigger "/pro:session.handoff"
+node "$HOME/.config/opencode/bin/session-handoff.mjs" write --trigger "/pro:session.handoff"
 
 # Close out finished work with an optional note
-node bin/session-handoff.mjs ack <snapshot-id> --note "wrapped up the fix"
+node "$HOME/.config/opencode/bin/session-handoff.mjs" ack <snapshot-id> --note "wrapped up the fix"
 
 # Dismiss stale entries that should not block future sessions
-node bin/session-handoff.mjs dismiss <snapshot-id> --reason "obsolete task"
+node "$HOME/.config/opencode/bin/session-handoff.mjs" dismiss <snapshot-id> --reason "obsolete task"
+
+If you vendor the CLI into a repo instead, you can run:
+
+```bash
+node bin/session-handoff.mjs list|ack|dismiss|write ...
+```
 ```
 
 Before ending a session:
 
-1. Run `node bin/session-handoff.mjs list` to review outstanding snapshot IDs.
+1. Run `node "$HOME/.config/opencode/bin/session-handoff.mjs" list` to review outstanding snapshot IDs.
 2. Open the referenced files under `doc/.plan/session-handoff/sessions/` and finish
    or dismiss each checklist via the CLI.
-3. Run `node bin/session-handoff.mjs write --trigger "/pro:session.handoff"` to
+3. Run `node "$HOME/.config/opencode/bin/session-handoff.mjs" write --trigger "/pro:session.handoff"` to
    capture the latest context. The ledger at `doc/.plan/session-handoff.md` should
    now show accurate `Outstanding Snapshots` and recent activity.
 

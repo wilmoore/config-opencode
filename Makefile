@@ -4,6 +4,7 @@ ROOT_DIR := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 OPENCODE_DIR ?= $(HOME)/.config/opencode
 COMMANDS_DIR := $(OPENCODE_DIR)/commands
 PLUGINS_DIR := $(OPENCODE_DIR)/plugins
+BIN_DIR := $(OPENCODE_DIR)/bin
 
 PRO_SOURCE_DIR := $(ROOT_DIR)/opencode/pro/commands
 MAKE_SOURCE_DIR := $(ROOT_DIR)/opencode/make/commands
@@ -17,6 +18,9 @@ PRO_HANDOFF_PLUGIN_LINK := $(PLUGINS_DIR)/pro-session-handoff.js
 PLAN_SAFETY_PLUGIN_SOURCE := $(ROOT_DIR)/opencode/pro/plugins/auto-return-to-plan.js
 PLAN_SAFETY_PLUGIN_LINK := $(PLUGINS_DIR)/pro-auto-return-to-plan.js
 
+SESSION_HANDOFF_CLI_SOURCE := $(ROOT_DIR)/bin/session-handoff.mjs
+SESSION_HANDOFF_CLI_LINK := $(BIN_DIR)/session-handoff.mjs
+
 PRO_COMMAND_FILES := $(notdir $(wildcard $(PRO_SOURCE_DIR)/*.md))
 MAKE_COMMAND_FILES := $(notdir $(wildcard $(MAKE_SOURCE_DIR)/*.md))
 RULES_COMMAND_FILES := $(notdir $(wildcard $(RULES_SOURCE_DIR)/*.md))
@@ -27,7 +31,7 @@ RULES_COMMAND_NAMES := $(patsubst %,rules:%,$(RULES_COMMAND_FILES))
 
 TOTAL_COMMAND_COUNT := $(shell echo $$(( $(words $(PRO_COMMAND_FILES)) + $(words $(MAKE_COMMAND_FILES)) + $(words $(RULES_COMMAND_FILES)) )))
 
-.PHONY: help install install-commands install-plugins install-agents install-pro install-make install-rules uninstall uninstall-commands uninstall-plugins uninstall-agents status doctor enable-plan-safety test
+.PHONY: help install install-commands install-plugins install-cli install-agents install-pro install-make install-rules uninstall uninstall-commands uninstall-plugins uninstall-cli uninstall-agents status doctor enable-plan-safety test
 
 .DEFAULT_GOAL := help
 
@@ -41,7 +45,7 @@ help: ## Show this help
 		awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z0-9_.-]+:.*?## / { printf "  %-20s %s\n", $$1, $$2 }' $(MAKEFILE_LIST); \
 	fi
 
-install: install-commands install-plugins ## Install commands and plugins
+install: install-commands install-plugins install-cli ## Install commands, plugins, and CLI tools
 	@echo "Install complete."
 
 install-commands: ## Install /pro, /make, and /rules commands
@@ -156,6 +160,29 @@ install-plugins: ## Install plugin symlinks
 	$(MAKE) --no-print-directory install-pro-plugins
 	@echo "Installed plugins."
 
+install-cli: ## Install CLI tools (session handoff)
+	@mkdir -p "$(BIN_DIR)"
+	@if [[ ! -f "$(SESSION_HANDOFF_CLI_SOURCE)" ]]; then \
+		echo "Error: missing CLI source file: $(SESSION_HANDOFF_CLI_SOURCE)"; \
+		exit 1; \
+	fi
+	@if [[ -e "$(SESSION_HANDOFF_CLI_LINK)" && ! -L "$(SESSION_HANDOFF_CLI_LINK)" ]]; then \
+		echo "Error: $(SESSION_HANDOFF_CLI_LINK) exists and is not a symlink. Refusing to overwrite."; \
+		exit 1; \
+	fi
+	@if [[ -L "$(SESSION_HANDOFF_CLI_LINK)" ]]; then \
+		target="$$(readlink "$(SESSION_HANDOFF_CLI_LINK)")"; \
+		if [[ "$$target" != "$(SESSION_HANDOFF_CLI_SOURCE)" ]]; then \
+			echo "Error: $(SESSION_HANDOFF_CLI_LINK) points to $$target (expected $(SESSION_HANDOFF_CLI_SOURCE))."; \
+			echo "Remove the symlink and rerun: make install-cli"; \
+			exit 1; \
+		fi; \
+		echo "OK: $(SESSION_HANDOFF_CLI_LINK) already linked"; \
+	else \
+		ln -s "$(SESSION_HANDOFF_CLI_SOURCE)" "$(SESSION_HANDOFF_CLI_LINK)"; \
+		echo "Linked: $(SESSION_HANDOFF_CLI_LINK) -> $(SESSION_HANDOFF_CLI_SOURCE)"; \
+	fi
+
 install-pro-plugins:
 	@set -e; \
 	for pair in \
@@ -181,7 +208,7 @@ install-pro-plugins:
 			echo "Linked: $$dest -> $$source"; \
 		fi; \
 	done
-uninstall: uninstall-commands uninstall-plugins ## Remove commands and plugins
+uninstall: uninstall-commands uninstall-plugins uninstall-cli ## Remove commands, plugins, and CLI tools
 	@echo "Uninstall complete."
 
 uninstall-commands:
@@ -249,6 +276,17 @@ uninstall-plugins: ## Remove plugin links
 		echo "Removed plugins."; \
 	else \
 		echo "No plugin links found."; \
+	fi
+
+uninstall-cli: ## Remove CLI tool links
+	@if [[ -L "$(SESSION_HANDOFF_CLI_LINK)" ]]; then \
+		rm "$(SESSION_HANDOFF_CLI_LINK)"; \
+		echo "Removed: $(SESSION_HANDOFF_CLI_LINK)"; \
+	elif [[ -e "$(SESSION_HANDOFF_CLI_LINK)" ]]; then \
+		echo "Error: $(SESSION_HANDOFF_CLI_LINK) exists and is not a symlink; refusing to remove."; \
+		exit 1; \
+	else \
+		echo "No CLI links found."; \
 	fi
 
 status: ## Show current command/plugin link status
@@ -335,16 +373,23 @@ status: ## Show current command/plugin link status
 			echo "$$name link: $$path -> $$(readlink "$$path")"; \
 		elif [[ -e "$$path" ]]; then \
 			echo "$$name path exists (not symlink): $$path"; \
-		else \
-			echo "$$name link missing: $$path"; \
-		fi; \
+	else \
+		echo "$$name link missing: $$path"; \
+	fi; \
 	done
+	@if [[ -L "$(SESSION_HANDOFF_CLI_LINK)" ]]; then \
+		echo "Session handoff CLI link: $(SESSION_HANDOFF_CLI_LINK) -> $$(readlink "$(SESSION_HANDOFF_CLI_LINK)")"; \
+	elif [[ -e "$(SESSION_HANDOFF_CLI_LINK)" ]]; then \
+		echo "Session handoff CLI exists (not symlink): $(SESSION_HANDOFF_CLI_LINK)"; \
+	else \
+		echo "Session handoff CLI link missing: $(SESSION_HANDOFF_CLI_LINK)"; \
+	fi
 
 enable-plan-safety: ## Apply Plan-by-default safety rails to global config
 	@node bin/enable-plan-safety.mjs
 
 doctor: ## Validate repo and command source prerequisites
-	@for path in "$(ROOT_DIR)" "$(OPENCODE_DIR)" "$(PRO_SOURCE_DIR)" "$(MAKE_SOURCE_DIR)" "$(RULES_SOURCE_DIR)"; do \
+	@for path in "$(ROOT_DIR)" "$(OPENCODE_DIR)" "$(PRO_SOURCE_DIR)" "$(MAKE_SOURCE_DIR)" "$(RULES_SOURCE_DIR)" "$(SESSION_HANDOFF_CLI_SOURCE)"; do \
 		if [[ ! -e "$$path" ]]; then \
 			echo "Error: required path missing: $$path"; \
 			exit 1; \

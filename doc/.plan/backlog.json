@@ -1,5 +1,5 @@
 {
-  "lastSequence": 30,
+  "lastSequence": 31,
   "items": [
     {
       "id": 1,
@@ -340,7 +340,7 @@
     {
       "id": 29,
       "title": "Port /pro:backlog* + /pro:spec* + /pro:spike and branch resume helpers",
-      "description": "Port the remaining ccplugins work-selection and session-continuity commands into OpenCode, focusing on: `/pro:backlog`, `/pro:backlog.add`, `/pro:backlog.resume`, `/pro:backlog.mvp`, `/pro:spec`, `/pro:spec.import`, `/pro:spike`, and branch-related helpers used for resuming work (e.g. `/pro:branch.park`, `/pro:branch.rmrf`, `/pro:handoff`, `/pro:git.main`, `/pro:roadmap`).\n\nRequirements:\n- Canonical plan root is `doc/.plan/` (ADR-005); read legacy `.plan/` only as a fallback.\n- `/pro:backlog.resume` should behave like a "new session entrypoint": resume in-progress work, and when ambiguous, prompt the user while recommending the best default (tie-break using newest pending session-handoff snapshot when available).\n- Avoid relying on bloated `AGENTS.md`/`CLAUDE.md` for workflow details; command text should be self-contained.\n\nDeliverables:\n- New command markdown files under `opencode/pro/commands/` for the above.\n- Planning notes archived under `doc/.plan/.done/feat-port-pro-backlog-spec-spike/`.",
+      "description": "Port the remaining ccplugins work-selection and session-continuity commands into OpenCode, focusing on: `/pro:backlog`, `/pro:backlog.add`, `/pro:backlog.resume`, `/pro:backlog.mvp`, `/pro:spec`, `/pro:spec.import`, `/pro:spike`, and branch-related helpers used for resuming work (e.g. `/pro:branch.park`, `/pro:branch.rmrf`, `/pro:handoff`, `/pro:git.main`, `/pro:roadmap`).\n\nRequirements:\n- Canonical plan root is `doc/.plan/` (ADR-005); read legacy `.plan/` only as a fallback.\n- `/pro:backlog.resume` should behave like a new session entrypoint: resume in-progress work, and when ambiguous, prompt the user while recommending the best default (tie-break using newest pending session-handoff snapshot when available).\n- Avoid relying on bloated `AGENTS.md`/`CLAUDE.md` for workflow details; command text should be self-contained.\n\nDeliverables:\n- New command markdown files under `opencode/pro/commands/` for the above.\n- Planning notes archived under `doc/.plan/.done/feat-port-pro-backlog-spec-spike/`.",
       "category": "feature",
       "severity": "medium",
       "fingerprint": "feature|29|port-pro-backlog-spec-spike-and-branch-resume-helpers",
@@ -353,12 +353,7 @@
     {
       "id": 30,
       "title": "Harden /pro:backlog* UX parity and validation",
-      "description": "Follow-up after porting `/pro:backlog*`:
-
-- Improve selection UX beyond plain numbered prompts (where OpenCode supports it).
-- Decide and document backlog status vocabulary (currently uses `open|in-progress|completed`; branch abort paths also mention `aborted`).
-- Re-run `coderabbit --prompt-only` when rate limits/timeouts allow and address any additional findings.
-",
+      "description": "Follow-up after porting `/pro:backlog*`:\n\n- Improve selection UX beyond plain numbered prompts (where OpenCode supports it).\n- Decide and document backlog status vocabulary (currently uses `open|in-progress|completed`; branch abort paths also mention `aborted`).\n- Re-run `coderabbit --prompt-only` when rate limits/timeouts allow and address any additional findings.\n",
       "category": "chore",
       "severity": "low",
       "fingerprint": "chore|30|harden-pro-backlog-ux-parity-and-validation",
@@ -366,6 +361,18 @@
       "sourceBranch": "feat/port-pro-backlog-spec-spike",
       "createdAt": "2026-04-01T16:56:59Z",
       "status": "open"
+    },
+    {
+      "id": 31,
+      "title": "Fix session handoff ledger references missing CLI",
+      "description": "Session handoff ledger/snapshots reference `node bin/session-handoff.mjs ...`, but that file is not present in typical client project repos. This makes the suggested next steps incorrect and causes confusing handoff commentary.\n\nFix: install the CLI globally under `~/.config/opencode/bin/session-handoff.mjs` and update ledger + docs to reference that path.\n\nRepro/expected/actual: TBD (fill from user report).\n",
+      "category": "bug",
+      "severity": "critical",
+      "fingerprint": "bug|31|fix-session-handoff-ledger-references-missing-cli",
+      "source": "/pro:bug",
+      "sourceBranch": "fix/session-handoff-cli-reference",
+      "createdAt": "2026-04-13T18:11:32Z",
+      "status": "in-progress"
     }
   ]
 }
