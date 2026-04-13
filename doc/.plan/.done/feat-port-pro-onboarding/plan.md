@@ -26,3 +26,9 @@ Port `_tmp_ccplugins/pro/commands/onboarding.md` into `opencode/pro/commands/onb
 ## Notes
 
 - `/pro:evaluate.framework` has been moved earlier in the roadmap and should be the next ccplugins workflow evaluated after onboarding.
+
+## Related ADRs
+
+- 005. Standardize Planning Root at doc/.plan
+- 007. Add /rules Toolkit Commands and Opt-in AGENTS Install
+
