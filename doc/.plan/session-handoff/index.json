@@ -117,6 +117,71 @@
       "workingTree": "clean",
       "recentCommit": "685ece7 Merge pull request #4 from wilmoore/fix/session-handoff-message-ux",
       "backlogSummary": "- In-progress items: 2 (latest: Plan ccplugins command port continuation)"
+    },
+    {
+      "id": "session-2026-04-13T18-20-12-410Z-d5db4dc1",
+      "filename": "session-2026-04-13T18-20-12-410Z-d5db4dc1.md",
+      "relativePath": "sessions/session-2026-04-13T18-20-12-410Z-d5db4dc1.md",
+      "status": "pending",
+      "createdAt": "2026-04-13T18:20:12.410Z",
+      "updatedAt": "2026-04-13T18:20:12.410Z",
+      "trigger": "plugin.initialize",
+      "branch": "main",
+      "workingTree": "clean",
+      "recentCommit": "8cd8604 Merge pull request #9 from wilmoore/fix/session-handoff-cli-reference",
+      "backlogSummary": "- In-progress items: 8 (latest: Fix session handoff ledger references missing CLI)"
+    },
+    {
+      "id": "session-2026-04-13T18-52-35-578Z-89954468",
+      "filename": "session-2026-04-13T18-52-35-578Z-89954468.md",
+      "relativePath": "sessions/session-2026-04-13T18-52-35-578Z-89954468.md",
+      "status": "pending",
+      "createdAt": "2026-04-13T18:52:35.578Z",
+      "updatedAt": "2026-04-13T18:52:35.578Z",
+      "trigger": "plugin.initialize",
+      "branch": "feat/port-pro-onboarding",
+      "workingTree": "dirty",
+      "recentCommit": "8cd8604 Merge pull request #9 from wilmoore/fix/session-handoff-cli-reference",
+      "backlogSummary": "- In-progress items: 1 (latest: Port /pro:onboarding)"
+    },
+    {
+      "id": "session-2026-04-13T18-56-06-505Z-88f5e8ad",
+      "filename": "session-2026-04-13T18-56-06-505Z-88f5e8ad.md",
+      "relativePath": "sessions/session-2026-04-13T18-56-06-505Z-88f5e8ad.md",
+      "status": "pending",
+      "createdAt": "2026-04-13T18:56:06.505Z",
+      "updatedAt": "2026-04-13T18:56:06.505Z",
+      "trigger": "plugin.initialize",
+      "branch": "feat/port-pro-onboarding",
+      "workingTree": "dirty",
+      "recentCommit": "8cd8604 Merge pull request #9 from wilmoore/fix/session-handoff-cli-reference",
+      "backlogSummary": "- In-progress items: 1 (latest: Port /pro:onboarding)"
+    },
+    {
+      "id": "session-2026-04-13T18-57-07-545Z-dcde169a",
+      "filename": "session-2026-04-13T18-57-07-545Z-dcde169a.md",
+      "relativePath": "sessions/session-2026-04-13T18-57-07-545Z-dcde169a.md",
+      "status": "pending",
+      "createdAt": "2026-04-13T18:57:07.545Z",
+      "updatedAt": "2026-04-13T18:57:07.545Z",
+      "trigger": "plugin.initialize",
+      "branch": "feat/port-pro-onboarding",
+      "workingTree": "dirty",
+      "recentCommit": "8cd8604 Merge pull request #9 from wilmoore/fix/session-handoff-cli-reference",
+      "backlogSummary": "- In-progress items: 1 (latest: Port /pro:onboarding)"
+    },
+    {
+      "id": "session-2026-04-13T18-57-43-606Z-ec17f05b",
+      "filename": "session-2026-04-13T18-57-43-606Z-ec17f05b.md",
+      "relativePath": "sessions/session-2026-04-13T18-57-43-606Z-ec17f05b.md",
+      "status": "pending",
+      "createdAt": "2026-04-13T18:57:43.606Z",
+      "updatedAt": "2026-04-13T18:57:43.606Z",
+      "trigger": "plugin.initialize",
+      "branch": "feat/port-pro-onboarding",
+      "workingTree": "dirty",
+      "recentCommit": "8cd8604 Merge pull request #9 from wilmoore/fix/session-handoff-cli-reference",
+      "backlogSummary": "- In-progress items: 1 (latest: Port /pro:onboarding)"
     }
   ]
 }

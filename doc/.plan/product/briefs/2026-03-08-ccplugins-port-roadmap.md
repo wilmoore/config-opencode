@@ -17,7 +17,7 @@ We need a durable, backlog-driven roadmap so the port can be continued across se
 
 Maintain a single sequential roadmap in `doc/.plan/backlog.json`, anchored by an epic that:
 
-- orders remaining ports (commands first, then author/clip, then infra)
+- orders remaining ports (commands first, then author/clip, then infra), while allowing newly added upstream workflows to be pulled forward when they unblock later planning
 - records key decisions (dropped items, ordering, portability requirements)
 - links to this brief
 
@@ -72,11 +72,12 @@ Order is intentional:
 2. `backlog.md`, `backlog.add.md`, `backlog.resume.md`, `backlog.mvp.md`
 3. `spike.md`
 4. `onboarding.md`
-5. `audit.md`, `audit.quality.md`, `audit.repo.md`, `audit.security.md`
-6. `quality-gate.md`, `dev.setup.md` (includes templates/_bins decisions)
-7. `branch.park.md`, `branch.rmrf.md`, `handoff.md`, `git.main.md`, `roadmap.md`
-8. `product.pitch.md`, `product.validate.md`
-9. long tail (includes `social.md`, `og.md`; excludes `bip.md`, `bip.setup.md`)
+5. evaluate the new ccplugins `/pro:evaluate.framework` workflow and port it into the best OpenCode-native surface
+6. `audit.md`, `audit.quality.md`, `audit.repo.md`, `audit.security.md`
+7. `quality-gate.md`, `dev.setup.md` (includes templates/_bins decisions)
+8. `branch.park.md`, `branch.rmrf.md`, `handoff.md`, `git.main.md`, `roadmap.md`
+9. `product.pitch.md`, `product.validate.md`
+10. long tail (includes `social.md`, `og.md`; excludes `bip.md`, `bip.setup.md`)
 
 Dropped:
 
@@ -112,7 +113,7 @@ Clipboard behavior requirements:
 - MCP config: `_tmp_ccplugins/pro/.mcp.json` -> OpenCode `opencode.json` (or documented equivalent)
 - Hooks: `_tmp_ccplugins/pro/hooks/*` -> OpenCode plugin behavior or explicit de-scope
 - Templates/bin assets: re-home `_tmp_ccplugins/pro/commands/_templates/*` and `_bins/*` and update references
-- Skills evaluation (excluding build-in-public): decide which are worth porting in OpenCode
+- Remaining skills evaluation (excluding build-in-public): decide which additional items are worth porting in OpenCode after `/pro:evaluate.framework`
 
 ---
 

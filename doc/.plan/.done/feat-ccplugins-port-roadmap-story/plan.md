@@ -31,11 +31,12 @@ Single unified sequential roadmap:
 2. `backlog.md`, `backlog.add.md`, `backlog.resume.md`, `backlog.mvp.md`
 3. `spike.md`
 4. `onboarding.md`
-5. `audit.md`, `audit.quality.md`, `audit.repo.md`, `audit.security.md`
-6. `quality-gate.md`, `dev.setup.md` (plus templates/_bins strategy)
-7. `branch.park.md`, `branch.rmrf.md`, `handoff.md`, `git.main.md`, `roadmap.md`
-8. `product.pitch.md`, `product.validate.md`
-9. long tail (including `social.md`, `og.md`; excluding `bip.md`, `bip.setup.md`)
+5. evaluate the new ccplugins `/pro:evaluate.framework` workflow and port it into the best OpenCode-native surface
+6. `audit.md`, `audit.quality.md`, `audit.repo.md`, `audit.security.md`
+7. `quality-gate.md`, `dev.setup.md` (plus templates/_bins strategy)
+8. `branch.park.md`, `branch.rmrf.md`, `handoff.md`, `git.main.md`, `roadmap.md`
+9. `product.pitch.md`, `product.validate.md`
+10. long tail (including `social.md`, `og.md`; excluding `bip.md`, `bip.setup.md`)
 
 `/rules:*` toolkit:
 
