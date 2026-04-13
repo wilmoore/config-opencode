@@ -396,7 +396,8 @@
       "source": "manual",
       "sourceBranch": "feat/port-pro-evaluate-framework",
       "createdAt": "2026-04-13T18:35:38Z",
-      "status": "completed"
+      "status": "resolved",
+      "resolvedAt": "2026-04-14T00:15:00Z"
     }
   ]
 }
