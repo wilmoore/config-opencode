@@ -1,5 +1,5 @@
 {
-  "lastSequence": 9,
+  "lastSequence": 10,
   "entries": [
     {
       "branch": "feat/continue-ccplugins-port",
@@ -85,6 +85,17 @@
           "number": 9,
           "file": "009-backlog-resume-recommendation-uses-session-handoff.md",
           "title": "/pro:backlog.resume Recommends a Default Using Session Handoff"
+        }
+      ]
+    },
+    {
+      "branch": "fix/session-handoff-cli-reference",
+      "slug": "fix-session-handoff-cli-reference",
+      "adrs": [
+        {
+          "number": 10,
+          "file": "010-install-session-handoff-cli-globally-and-reference-it-in-ledgers.md",
+          "title": "Install Session Handoff CLI Globally and Reference It in Ledgers"
         }
       ]
     }

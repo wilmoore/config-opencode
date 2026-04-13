@@ -29,3 +29,4 @@ We use the Michael Nygard format.
 - [007. Add /rules Toolkit Commands and Opt-in AGENTS Install](007-add-rules-toolkit-and-opt-in-agents-install.md)
 - [008. Project-Scoped Instruction Discovery for /pro Commands](008-project-scoped-instruction-discovery.md)
 - [009. /pro:backlog.resume Recommends a Default Using Session Handoff](009-backlog-resume-recommendation-uses-session-handoff.md)
+- [010. Install Session Handoff CLI Globally and Reference It in Ledgers](010-install-session-handoff-cli-globally-and-reference-it-in-ledgers.md)

@@ -140,11 +140,19 @@ ${entry.backlogSummary ?? "- In-progress items: unknown"}
 ## Next Steps
 
 1. Review the outstanding checklist stored in this file.
-2. Once complete, acknowledge the snapshot:
+2. Once complete, acknowledge the snapshot (run from the client project root):
+   \`\`\`bash
+   node "$HOME/.config/opencode/bin/session-handoff.mjs" ack ${entry.id}
+   \`\`\`
+   If you have vendored the CLI into the repo, this also works:
    \`\`\`bash
    node bin/session-handoff.mjs ack ${entry.id}
    \`\`\`
-3. If the work is obsolete, dismiss it instead:
+3. If the work is obsolete, dismiss it instead (run from the client project root):
+   \`\`\`bash
+   node "$HOME/.config/opencode/bin/session-handoff.mjs" dismiss ${entry.id} --reason "why"
+   \`\`\`
+   Vendored alternative:
    \`\`\`bash
    node bin/session-handoff.mjs dismiss ${entry.id} --reason "why"
    \`\`\`
@@ -202,10 +210,18 @@ ${recentSection}
 
 ## Commands
 
-- \`node bin/session-handoff.mjs list\` — show pending snapshots
-- \`node bin/session-handoff.mjs ack <id> [--note "done"]\` — mark complete
-- \`node bin/session-handoff.mjs dismiss <id> --reason "why"\` — abandon work
-- \`node bin/session-handoff.mjs write --trigger "/pro:session.handoff"\` — capture a fresh snapshot
+Run these from the client project root (adjust $HOME/.config if you use a custom config home):
+
+- \`node "$HOME/.config/opencode/bin/session-handoff.mjs" list\` — show pending snapshots
+- \`node "$HOME/.config/opencode/bin/session-handoff.mjs" ack <id> [--note "done"]\` — mark complete
+- \`node "$HOME/.config/opencode/bin/session-handoff.mjs" dismiss <id> --reason "why"\` — abandon work
+- \`node "$HOME/.config/opencode/bin/session-handoff.mjs" write --trigger "/pro:session.handoff"\` — capture a fresh snapshot
+
+If you vendor the CLI into a repo instead:
+
+- \`node bin/session-handoff.mjs list|ack|dismiss|write ...\`
+
+Compatibility note: some older snapshot files may still mention \`node bin/session-handoff.mjs ...\`. If your repo does not contain that file, use the globally installed CLI commands listed above.
 
 All snapshots live under \`${planRoot.CANONICAL_PLAN_ROOT}/session-handoff/sessions/\`. Review each file before acknowledging or dismissing it.`
 }
