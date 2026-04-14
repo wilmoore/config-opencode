@@ -203,7 +203,8 @@
       "source": "/pro:feature",
       "sourceBranch": "feat/port-pro-audit-quality-product",
       "createdAt": "2026-03-08T05:02:46Z",
-      "status": "in-progress"
+      "status": "completed",
+      "completedAt": "2026-04-14T00:30:00Z"
     },
     {
       "id": 18,
@@ -215,7 +216,8 @@
       "source": "/pro:feature",
       "sourceBranch": "feat/port-pro-audit-quality-product",
       "createdAt": "2026-03-08T05:02:46Z",
-      "status": "in-progress"
+      "status": "completed",
+      "completedAt": "2026-04-14T00:30:00Z"
     },
     {
       "id": 19,
@@ -239,7 +241,8 @@
       "source": "/pro:feature",
       "sourceBranch": "feat/port-pro-audit-quality-product",
       "createdAt": "2026-03-08T05:02:46Z",
-      "status": "in-progress"
+      "status": "completed",
+      "completedAt": "2026-04-14T00:30:00Z"
     },
     {
       "id": 21,
