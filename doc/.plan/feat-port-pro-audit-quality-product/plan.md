@@ -53,21 +53,49 @@ Port the remaining ccplugins `/pro:*` commands for audit, quality, and product w
 
 ### Phase 3: Port Quality-Gate and Dev.Setup (#18)
 
-- [ ] Read `_tmp_ccplugins/pro/commands/quality-gate.md`
-- [ ] Read `_tmp_ccplugins/pro/commands/dev.setup.md`
-- [ ] Analyze `_tmp_ccplugins/pro/commands/_templates/*` dependencies
-- [ ] Analyze `_tmp_ccplugins/pro/commands/_bins/*` dependencies
-- [ ] Decide asset strategy (inline vs. separate dir vs. skip)
-- [ ] Port commands with asset references resolved
+- [x] Read `_tmp_ccplugins/pro/commands/quality-gate.md`
+- [x] Read `_tmp_ccplugins/pro/commands/dev.setup.md`
+- [x] Analyze `_tmp_ccplugins/pro/commands/_templates/*` dependencies
+- [x] Analyze `_tmp_ccplugins/pro/commands/_bins/*` dependencies
+- [x] Decide asset strategy (inline vs. separate dir vs. skip)
+- [x] Port commands with asset references resolved
+
+**Asset Strategy Decision:**
+- Created `opencode/pro/commands/_templates/quality-gate/` for CI workflow and lint-staged templates
+- Created `opencode/pro/commands/_bins/dev/` for dev.ts, notify.ts, and README.template.md
+- Updated command path references to use OpenCode directory structure
+
+**Ported files:**
+- `opencode/pro/commands/quality-gate.md`
+- `opencode/pro/commands/dev.setup.md`
+- `opencode/pro/commands/_templates/quality-gate/*.hbs` (CI templates)
+- `opencode/pro/commands/_templates/quality-gate/*.json` (lint-staged configs)
+- `opencode/pro/commands/_bins/dev/*` (dev CLI scripts and docs)
 
 ### Phase 4: Port Product Commands (#20)
 
-- [ ] Read `_tmp_ccplugins/pro/commands/product.validate.md`
-- [ ] Read `_tmp_ccplugins/pro/commands/product.pitch.md`
-- [ ] Port each to `opencode/pro/commands/`
-- [ ] Verify compatibility with existing `/pro:product.brief`
+- [x] Read `_tmp_ccplugins/pro/commands/product.validate.md`
+- [x] Read `_tmp_ccplugins/pro/commands/product.pitch.md`
+- [x] Port each to `opencode/pro/commands/`
+- [x] Verify compatibility with existing `/pro:product.brief`
+
+**Compatibility notes:**
+- Updated `.plan/product/` paths to `doc/.plan/product/` to match existing product.brief.md
+- Consistent with ADR-005 (doc/.plan/ is the planning root)
+
+**Ported files:**
+- `opencode/pro/commands/product.validate.md`
+- `opencode/pro/commands/product.pitch.md`
+
+## Summary
+
+All phases complete:
+- Phase 1: #11 blocked on upstream (no tui.agent.set API)
+- Phase 2: #17 complete - 4 audit commands ported
+- Phase 3: #18 complete - quality-gate + dev.setup with assets
+- Phase 4: #20 complete - product.validate + product.pitch
 
 ## Notes
 
 - This is a batch of related porting work
-- Item #11 may be blocked on upstream OpenCode features
+- Item #11 is blocked on upstream OpenCode features (needs tui.agent.set)

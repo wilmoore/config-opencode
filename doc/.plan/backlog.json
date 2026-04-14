@@ -124,14 +124,14 @@
     {
       "id": 11,
       "title": "Harden auto-return-to-plan against custom primary agent cycles",
-      "description": "The current auto-return-to-plan plugin relies on `agent.cycle`, which is only deterministic for the default two-primary-agent setup (Build/Plan). Once upstream exposes deterministic agent switching (e.g. `tui.agent.set { name }`) and/or a current-agent API/event, update the plugin to switch to Plan by name so the safety rail remains correct even with multiple custom primary agents.",
+      "description": "The current auto-return-to-plan plugin relies on `agent.cycle`, which is only deterministic for the default two-primary-agent setup (Build/Plan). Once upstream exposes deterministic agent switching (e.g. `tui.agent.set { name }`) and/or a current-agent API/event, update the plugin to switch to Plan by name so the safety rail remains correct even with multiple custom primary agents.\n\n**Blocked:** OpenCode TUI does not currently expose tui.agent.set or equivalent. Revisit when upstream adds this capability.",
       "category": "feature",
       "severity": "medium",
       "fingerprint": "feature|11|harden-auto-return-to-plan-against-custom-primary-agent-cycles",
       "source": "/pro:pr",
-      "sourceBranch": "feat/port-pro-audit-quality-product",
+      "sourceBranch": "feat/force-plan-mode-default",
       "createdAt": "2026-03-08T02:45:41Z",
-      "status": "in-progress"
+      "status": "open"
     },
     {
       "id": 12,
