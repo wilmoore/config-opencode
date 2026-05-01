@@ -30,3 +30,5 @@ We use the Michael Nygard format.
 - [008. Project-Scoped Instruction Discovery for /pro Commands](008-project-scoped-instruction-discovery.md)
 - [009. /pro:backlog.resume Recommends a Default Using Session Handoff](009-backlog-resume-recommendation-uses-session-handoff.md)
 - [010. Install Session Handoff CLI Globally and Reference It in Ledgers](010-install-session-handoff-cli-globally-and-reference-it-in-ledgers.md)
+- [011. Co-locate Command Support Assets with Ported /pro Commands](011-co-locate-command-support-assets-with-ported-pro-commands.md)
+- [012. Treat Deterministic Agent Switching as an Upstream Dependency](012-treat-deterministic-agent-switching-as-an-upstream-dependency.md)

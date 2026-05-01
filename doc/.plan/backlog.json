@@ -1,5 +1,5 @@
 {
-  "lastSequence": 33,
+  "lastSequence": 34,
   "items": [
     {
       "id": 1,
@@ -401,6 +401,18 @@
       "createdAt": "2026-04-13T18:35:38Z",
       "status": "resolved",
       "resolvedAt": "2026-04-14T00:15:00Z"
+    },
+    {
+      "id": 34,
+      "title": "Harden plan safety rail when deterministic agent APIs ship",
+      "description": "Current safety-rail behavior still depends on `agent.cycle` semantics. When OpenCode exposes deterministic target APIs (for example `tui.agent.set` and/or current-agent queries), update the implementation to set Plan by name and validate behavior in multi-primary-agent setups.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|34|harden-plan-safety-rail-when-deterministic-agent-apis-ship",
+      "source": "/pro:pr",
+      "sourceBranch": "feat/port-pro-audit-quality-product",
+      "createdAt": "2026-05-01T00:00:00Z",
+      "status": "open"
     }
   ]
 }

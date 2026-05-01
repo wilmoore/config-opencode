@@ -99,3 +99,8 @@ All phases complete:
 
 - This is a batch of related porting work
 - Item #11 is blocked on upstream OpenCode features (needs tui.agent.set)
+
+## Related ADRs
+
+- `doc/decisions/011-co-locate-command-support-assets-with-ported-pro-commands.md`
+- `doc/decisions/012-treat-deterministic-agent-switching-as-an-upstream-dependency.md`
