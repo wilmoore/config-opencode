@@ -1,5 +1,5 @@
 {
-  "lastSequence": 34,
+  "lastSequence": 36,
   "items": [
     {
       "id": 1,
@@ -412,6 +412,30 @@
       "source": "/pro:pr",
       "sourceBranch": "feat/port-pro-audit-quality-product",
       "createdAt": "2026-05-01T00:00:00Z",
+      "status": "open"
+    },
+    {
+      "id": 35,
+      "title": "Add lightweight non-coding workflow command",
+      "description": "Add a new /pro command for branch-isolated operational tasks that are not quite features or chores (for example CRM updates, dashboard status changes, or agent/executive repo workflows). The command should keep the branch-first safety invariant while removing heavy coding workflow steps by default, support no-change outcomes, and make commit/push optional and fast when changes do exist.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|35|add-lightweight-non-coding-workflow-command",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/add-lightweight-workflow-command",
+      "createdAt": "2026-05-07T16:22:29Z",
+      "status": "in-progress"
+    },
+    {
+      "id": 36,
+      "title": "Harden /clip command safety and clipboard fallbacks",
+      "description": "Follow up on `/clip:*` command specs to tighten URL validation, timeout/retry guidance, clipboard fallback semantics (especially screenshot copy behavior on macOS), and clearer failure signaling. Generated from coderabbit findings during adjacent feature work.",
+      "category": "feature",
+      "severity": "medium",
+      "fingerprint": "feature|36|harden-clip-command-safety-and-clipboard-fallbacks",
+      "source": "/pro:feature",
+      "sourceBranch": "feat/add-lightweight-workflow-command",
+      "createdAt": "2026-05-07T16:22:29Z",
       "status": "open"
     }
   ]
