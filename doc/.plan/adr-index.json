@@ -1,5 +1,5 @@
 {
-  "lastSequence": 12,
+  "lastSequence": 13,
   "entries": [
     {
       "branch": "feat/continue-ccplugins-port",
@@ -114,6 +114,18 @@
           "title": "Treat Deterministic Agent Switching as an Upstream Dependency"
         }
       ]
-    }
-  ]
+        },
+        {
+          "branch": "feat/add-lightweight-workflow-command",
+          "slug": "feat-add-lightweight-workflow-command",
+          "adrs": [
+            {
+              "number": 13,
+              "file": "013-lightweight-ops-command.md",
+              "title": "Lightweight Ops Command"
+            }
+          ]
+        }
+    ]
 }
+
